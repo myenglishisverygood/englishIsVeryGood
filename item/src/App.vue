@@ -1,16 +1,14 @@
 <template>
   <div id="app">
-    <!--<ChangeCity></ChangeCity>-->
-    <SuperVip></SuperVip>
+    <ChangeCity></ChangeCity>
   </div>
 </template>
 
 <script>
 import ChangeCity from "./myenglish/ChangeCity";
-import SuperVip from "./myenglish/SuperVip";
 export default {
   name: 'App',
-  components: {SuperVip, ChangeCity}
+  components: {ChangeCity}
 }
 </script>
 
