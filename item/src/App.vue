@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-    <ChangeCity></ChangeCity>
+    <!--<ChangeCity></ChangeCity>-->
+    <SuperVip></SuperVip>
   </div>
 </template>
 
 <script>
 import ChangeCity from "./myenglish/ChangeCity";
+import SuperVip from "./myenglish/SuperVip";
 export default {
   name: 'App',
-  components: {ChangeCity}
+  components: {SuperVip, ChangeCity}
 }
 </script>
 
 <style>
 #app{
-  background: #f5f5f5;
+  height: 100%;
+  width: 100%;
 }
 </style>
