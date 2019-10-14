@@ -1,15 +1,13 @@
 <template>
   <div id="app">
-    <ChangeCity></ChangeCity>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import ChangeCity from "./myenglish/ChangeCity";
 export default {
   name: 'App',
-  components: {ChangeCity}
-}
+};
 </script>
 
 <style>
