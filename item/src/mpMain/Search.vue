@@ -41,6 +41,7 @@
           </li>
         </ul>
       </div>
+      <foots></foots>
     </div>
 </template>
 
@@ -50,6 +51,7 @@
   import "../../node_modules/bootstrap/dist/css/bootstrap.css"
   import 'vant/lib/search/style';
   import Header from "./Header";
+  import Foots from "./foots";
     export default {
         name: "Search",
         data(){
@@ -63,6 +65,7 @@
           }
         },
         components:{
+          Foots,
           Header,
           [Search.name]: Search
         },
@@ -95,7 +98,7 @@
             this.show = true;
           },
           suo(){
-              console.log("触发点击返回按钮!");
+              this.$router.push({path:'/home'})
           }
         },
 

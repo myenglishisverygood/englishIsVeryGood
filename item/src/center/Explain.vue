@@ -29,10 +29,11 @@
       },
       computed:{
         gettitle(){
-          return this.$route.query.name;
+          return this.$route.params.name;
         },
         getcon(){
-          let val = this.$route.query.va
+          let val = this.$route.params.va
+          console.log(val)
           let everyval = val.split("###")
           for(let i = 1 ; i < everyval.length; i++){
             let v = everyval[i].split("？")

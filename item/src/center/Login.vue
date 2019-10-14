@@ -2,7 +2,7 @@
     <div class="wrap">
       <div class="head_top">
         密码登录
-        <router-link :to="{}"><span class="glyphicon glyphicon-menu-left" ></span>
+        <router-link :to="{path:'/center'}"><span class="glyphicon glyphicon-menu-left" ></span>
         </router-link>
       </div>
      <form class="loginfrom">

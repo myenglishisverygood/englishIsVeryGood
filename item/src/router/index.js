@@ -13,10 +13,27 @@ import Shopclass from "../myenglish/Shopclass"
 //下载页面
 import Download from "../myenglish/Download"
 //搜索
+import Search from '../mpMain/Search'
 //订单
+import Dingdan from '../mpMain/Dingdan'
 //余额
 import Balance from "../myenglish/balance"
-
+//积分商城
+import Integral from "../center/Shop"
+//优惠
+import RedPacket from "../center/RedPacket"
+//兑换红包
+import Exchange from '../myenglish/Redenvelopes'
+//积分
+import jifen from '../center/Integration'
+//积分说明
+import Explain from '../center/Explain'
+//服务中心
+import Server from '../center/Service'
+//服务中心列表
+import Context from '../center/Context'
+// 登录
+import  Login from '../center/Login'
 Vue.use(Router)
 
 export default new Router({
@@ -28,6 +45,17 @@ export default new Router({
     {path:"/home",component:Homepage,name:"j"},
     {path:"/shopclass",component:Shopclass,name:'x'},
     {path:"/download",component:Download},
-    {path:"/balance",component:Balance}
+    {path:"/balance",component:Balance},
+    {path:'/integral',component:Integral},
+    {path:'/redpacket',component:RedPacket},
+    {path:'/exchange',component:Exchange},
+    {path:'/integration',component:jifen},
+    {path:'/explain',component:Explain,name:'k'},
+    {path:'/inter',component:jifen},
+    {path:'/dingdan',component:Dingdan},
+    {path:'/search',component:Search},
+    {path:'/server',component:Server},
+    {path:'/context',component:Context,name:"context"},
+    {path:'/login',component:Login}
   ]
 })

@@ -2,7 +2,7 @@
     <div class="service">
       <div class="head-top">
         服务中心
-        <router-link :to="{}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
+        <router-link :to="{path:'/center'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
       </div>
    <div class="customer">
      <router-link :to="{}" class="customer_zx">
@@ -17,10 +17,12 @@
       <div class="question ">
         <p id="hot">热门问题</p>
         <ul>
-          <li v-for="(v, i) in ccc" :key="i" id="Cli">
-            <span id="con">{{v}}</span>
-            <router-link :to="{path:'/context',query:{name:v, c:cc[i]}}" id="link"> ></router-link>
-          </li>
+          <router-link v-for="(v, i) in ccc" :key="i" :to="{name:'context',params:{name:v, c:cc[i]}}">
+            <li id="Cli">
+              <span id="con">{{v}}</span>
+              <span id="link"> > </span>
+            </li>
+          </router-link>
         </ul>
 
       </div>
@@ -124,7 +126,6 @@
     justify-content: space-between;
     align-items: center;
     border-top: 1px solid #f5f5f5;
-
   }
   #con,#link{
     color: #666;

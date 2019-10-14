@@ -2,7 +2,7 @@
     <div class="wrap">
       <div class="head-top">
        {{gettitle}}
-        <router-link :to="{path:'/service'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
+        <router-link :to="{path:'/server'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
       </div>
       <p>{{getcon}}</p>
     </div>
@@ -18,10 +18,10 @@
       },
       computed:{
           gettitle(){
-            return this.$route.query.name;
+            return this.$route.params.name;
           },
           getcon(){
-            return this.$route.query.c
+            return this.$route.params.c
           }
       }
     }

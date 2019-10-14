@@ -4,7 +4,7 @@
       <span class="glyphicon glyphicon-menu-left left"></span>
       <span class="me">我的</span>
     </div>
-    <div id="link">
+    <div id="link" @click="login">
       <div class="img_tx">
         <a href="" class="tx"><img src="./img/tx.jpeg" height="60rem" width="60rem"/></a>
       </div>
@@ -26,12 +26,12 @@
               <b>0.00</b>元</span>
           <span class="info-data-bottom">我的余额</span>
         </router-link>
-        <router-link :to="{}" class="info-data-link">
+        <router-link :to="{path:'/redpacket'}" class="info-data-link">
             <span class="info-data-top">
               <b>0</b>个</span>
           <span class="info-data-bottom">我的优惠</span>
         </router-link>
-        <router-link :to="{}" class="info-data-link">
+        <router-link :to="{path:'/integration'}" class="info-data-link">
             <span class="info-data-top">
               <b>0</b>个</span>
           <span class="info-data-bottom">我的积分</span>
@@ -39,14 +39,14 @@
       </ul>
     </div>
     <div class="profile">
-      <router-link :to="{}" class="myorder">
+      <router-link :to="{path:'/dingdan'}" class="myorder">
         <i class="iconfont icon-chakantiezigengduo aa"></i>
         <div class="myorder-div">
           <span class="myorder-span">我的订单</span>
           <a href="" class="glyphicon glyphicon-menu-right"></a>
         </div>
       </router-link>
-      <router-link :to="{}" class="myorder">
+      <router-link :to="{path:'/integral'}" class="myorder">
         <i class="iconfont icon-shangchengjifenshangcheng_xuanzhong bb"></i>
         <div class="myorder-div">
           <span class="myorder-span">积分商城</span>
@@ -62,7 +62,7 @@
       </router-link>
     </div>
     <div class="profile">
-      <router-link to="{}" class="myorder">
+      <router-link :to="{path:'/server'}" class="myorder">
         <i class="iconfont icon-fuwu ee"></i>
         <div class="myorder-div">
           <span class="myorder-span">服务中心</span>
@@ -91,11 +91,12 @@
         StoreImage:[]
       }
     },
-    StoreImage(){
-      this.axios.post("https://elm.cangdu.org/v1/addimg/:type?").then((response)=>{
-         console.log(response.data);
-      })
+    methods:{
+      login(){
+        this.$router.push({path:'/login'})
+      }
     }
+
   }
 </script>
 

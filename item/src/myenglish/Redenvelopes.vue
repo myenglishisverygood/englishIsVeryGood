@@ -1,7 +1,7 @@
 <template>
     <div class="redenvelopes">
       <div class="title">
-      <img src="./img/箭头.png" alt="" class="arrows">
+      <img src="./img/箭头.png" alt="" class="arrows" @click="exit">
       <span>兑换红包</span>
     </div>
       <!-- 兑换码 -->
@@ -72,6 +72,9 @@
           this.axios.post("https://elm.cangdu.org/v1/captchas").then((res)=>{
             this.codesrc = res.data.code
           });
+        },
+        exit(){
+          this.$router.push({path:'/redpacket'})
         },
         exnet(){
           this.axios.get("https://elm.cangdu.org/v1/user").then((res)=>{

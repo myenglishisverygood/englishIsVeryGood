@@ -2,7 +2,7 @@
     <div class="wrap">
       <div class="head-top">
         我的积分
-        <router-link :to="{}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
+        <router-link :to="{path:'/center'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
       </div>
       <div class="container">
         <div class="content">
@@ -10,7 +10,7 @@
            <span class="title-style">当前积分</span>
             <div class="description">
               <img src="./img/说明.png"/>
-              <router-link :to="{path:'/explain',query:{name:this.explain.pointtextCaption,va:this.explain.pointtextContent}}">积分说明</router-link>
+              <router-link :to="{name:'k',params:{name:this.explain.pointtextCaption,va:this.explain.pointtextContent}}">积分说明</router-link>
             </div>
           </div>
          <p class="content-num">

@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="head-top">
       我的优惠
-      <router-link :to="{}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
+      <router-link :to="{path:'/center'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
     </div>
     <div class="categroy_title">
       <span class="choose" v-for="(item,index) in itemList" :class="{ 'red-link':index === isActive }"  @click="getItem(item, index)">{{item}}</span>
@@ -46,7 +46,7 @@
         </router-link>
       </div>
       <footer class="hongbao_footer">
-        <router-link :to="{}" class="hongbao_style">兑换红包</router-link>
+        <router-link :to="{path:'/exchange'}" class="hongbao_style">兑换红包</router-link>
         <router-link :to="{}" class="hongbao_style">推荐有礼</router-link>
       </footer>
     </div>

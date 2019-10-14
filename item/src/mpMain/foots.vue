@@ -54,7 +54,7 @@
              } else if (this.a =!this.a) {
                this.yan = false;
              }
-
+            this.$router.push({path:'/search'})
 
            },
          ding(){
@@ -66,7 +66,7 @@
             } else if (this.a =!this.a) {
               this.yan1 = false;
             }
-
+            this.$router.push({path:'/dingdan'})
           },
           my(){
             if (this.a){

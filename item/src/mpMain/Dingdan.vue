@@ -6,21 +6,24 @@
           <span class="wz">{{wz1}}</span>
         </div>
       </nav>
+      <foots></foots>
     </div>
 </template>
 
 <script>
   import "../../node_modules/bootstrap/dist/css/bootstrap.css"
+  import Foots from "./foots";
     export default {
         name: "Dingdan",
-        data(){
+      components: {Foots},
+      data(){
           return{
             wz1:"订单信息"
           }
         },
         methods:{
           suo(){
-            console.log("触发订单页面返回按钮!");
+            this.$router.push({path:'/home'})
           }
         }
     }

@@ -27,7 +27,7 @@
         methods:{
           // 搜索点击
           suo(){
-            console.log("点击搜索");
+            this.$router.push({path:'/search'})
           },
           //登录点击
           login(){

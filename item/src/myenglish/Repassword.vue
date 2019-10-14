@@ -125,8 +125,8 @@
     margin: 1.5rem auto;
   }
   .code{
-    background: white;
-  }
+     background: white;
+   }
   .code img{
     width: 3.5rem;
     height: 2.5rem;
