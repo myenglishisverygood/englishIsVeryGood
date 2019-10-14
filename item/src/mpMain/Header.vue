@@ -19,7 +19,7 @@
           }
         },
         created(){
-           this.wz1 = this.$route.params.add
+           this.wz1 = this.$route.query.add
         },
         methods:{
           // 搜索点击

@@ -10,7 +10,7 @@
         <div class="sub" @click="submitInfo">提交</div>
       </div>
       <div>
-        <router-link v-for="(v,i) in minute" :key="i" class="list" :to="{name:'j',params:{add:v.address}}">
+        <router-link v-for="(v,i) in minute" :key="i" class="list" :to="{name:'j',query:{add:v.address}}">
           <div class="listName">{{v.name}}</div>
           <div class="listAddress">{{v.address}}</div>
         </router-link>
@@ -44,9 +44,6 @@
             let netUrlData = this.netUrl + this.cityId + "&keyword=" + this.inputInfo
             this.axios.get(netUrlData).then((res)=>{
               this.minute = res.data
-              console.log(this.minute);
-              console.log(res.data[0].longitude)
-              console.log(res.data[0].latitude)
             })
           }
         }

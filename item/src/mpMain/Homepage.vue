@@ -19,7 +19,7 @@
         }
       },
       created(){
-        this.headerAddress = this.$route.params.add;
+        this.headerAddress = this.$route.query.add;
       },
     }
 </script>

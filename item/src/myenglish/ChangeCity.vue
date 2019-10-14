@@ -15,14 +15,18 @@
    <div>
      <div class="hotCity">热门城市</div>
      <ul style="overflow: hidden">
-       <li class="hotCityList"  v-for="(c,i) in hotCityArr" :key="i">{{c}}</li>
+       <li class="hotCityList"  v-for="(c,i) in hotCityArr" :key="i">
+         <router-link :to="{name:'p',params:{city:c.name,id:c.id}}">{{c.name}}</router-link>
+       </li>
      </ul>
    </div>
    <!--全部城市-->
    <div v-for="(v,index) in cityLetter" :key="index">
      <p class="letter">{{v}}</p>
      <ul style="overflow: hidden;background: white">
-       <li v-for="(x,y) in allCityArr[v]" :key="y" class="citylink" @click="cityBtn">{{x.name}}</li>
+       <li v-for="(x,y) in allCityArr[v]" :key="y" class="citylink" @click="cityBtn">
+         <router-link :to="{name:'p',params:{city:x.name,id:x.id}}">{{x.name}}</router-link>
+       </li>
      </ul>
    </div>
  </div>
@@ -51,10 +55,11 @@
       created(){
         // 发起网络请求获取热门城市列表
         this.axios.get("https://elm.cangdu.org/v1/cities?type=hot").then((response)=>{
-          let hC = response.data;
-          hC.forEach((i)=>{
-            this.hotCityArr.push(i.name)
-          });
+          console.log(response)
+          // let hC = response.data;
+          // hC.forEach((i)=>{
+            this.hotCityArr = response.data
+          // });
         });
         // 发起网络请求获取所有城市列表
         this.axios.get("https://elm.cangdu.org/v1/cities?type=group").then((res)=>{
