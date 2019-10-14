@@ -9,29 +9,29 @@
       <!--第一部分-->
       <div class="swiper-slide">
         <div class="link1-to">
-          <div class="to1" v-for="(v,i) in arr1[0]" :key="i" @click="tiao">
+          <router-link class="to1" v-for="(v,i) in arr1[0]" :key="i" @click="tiao" :to="{name:'x',query:{title:v.title}}">
           <img :src="A+v.image_url" style="width: 3rem;height: 3rem"><p class="towz">{{v.title}}</p>
-          </div>
+          </router-link>
         </div>
 
         <div class="link1-bo">
-          <div class="to1" v-for="(v,i) in arr1[1]" :key="i" @click="tiao">
+          <router-link class="to1" v-for="(v,i) in arr1[1]" :key="i" @click="tiao" :to="{name:'x',query:{title:v.title}}">
             <img :src="A+v.image_url" style="width: 3rem;height: 3rem"><p class="towz">{{v.title}}</p>
-          </div>
+          </router-link>
         </div>
       </div>
       <!--第二部分-->
       <div class="swiper-slide">
         <div class="link1-to">
-          <div class="to1" v-for="(v,i) in arr1[2]" :key="i" @click="tiao">
+          <router-link class="to1" v-for="(v,i) in arr1[2]" :key="i" @click="tiao" :to="{name:'x',query:{title:v.title}}">
             <img :src="A+v.image_url" style="width: 3rem;height: 3rem"><p class="towz">{{v.title}}</p>
-          </div>
+          </router-link>
         </div>
 
         <div class="link1-bo">
-          <div class="to1" v-for="(v,i) in arr1[3]" :key="i" @click="tiao">
+          <router-link class="to1" v-for="(v,i) in arr1[3]" :key="i" @click="tiao" :to="{name:'x',query:{title:v.title}}">
             <img :src="A+v.image_url" style="width: 3rem;height: 3rem"><p class="towz">{{v.title}}</p>
-          </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -111,7 +111,6 @@
         },
         created(){
           this.axios.get("https://elm.cangdu.org/v2/index_entry").then((result)=>{
-            // console.log(result.data);
             const len = result.data.length;
             //把数据分成四条数据一组
             let arr2 = [];
@@ -141,7 +140,6 @@
             }).then((res)=>{
             // console.log(res.data);
             this.arrshop=res.data;
-            console.log(this.arrshop);
           }).catch((err)=>{
             console.log(err);
           });

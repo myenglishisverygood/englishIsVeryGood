@@ -2,7 +2,7 @@
   <nav class="navbar navbar-default navbar-fixed-top a">
           <i class="suo iconfont icon-sousuo" style="font-size: 1.5rem;color: white;" @click="suo"/>
     <div class="kua">
-      <span class="wz">{{wz1}}</span>
+      <span class="wz">{{title}}</span>
     </div>
       <i class="iconfont icon-dengluyonghuming navbar-text pull-right ren" style="font-size: 1.5rem;color: white;" @click="login"/>
   </nav>
@@ -15,11 +15,14 @@
         name: "Header",
         data(){
           return {
-            wz1:""
+            title:""
           }
         },
         created(){
-           this.wz1 = this.$route.query.add
+           this.wz1 = this.$route.query.geo
+            this.axios.get("https://elm.cangdu.org/v2/pois/" + this.wz1).then((res)=>{
+              this.title = res.data.name
+            })
         },
         methods:{
           // 搜索点击

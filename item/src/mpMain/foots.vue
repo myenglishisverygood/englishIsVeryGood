@@ -44,7 +44,7 @@
              } else if (this.a =!this.a) {
                this.e1=require('@/assets/image/bottom11.png');
              }
-
+              this.$router.push({path:"/home"})
             },
            sou(){
              if (this.a){
@@ -77,6 +77,7 @@
             } else if (this.a =!this.a) {
               this.yan2 = false;
             }
+            this.$router.push({path:'/center'})
 
           }
         }

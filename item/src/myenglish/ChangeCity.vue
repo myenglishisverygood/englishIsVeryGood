@@ -55,11 +55,7 @@
       created(){
         // 发起网络请求获取热门城市列表
         this.axios.get("https://elm.cangdu.org/v1/cities?type=hot").then((response)=>{
-          console.log(response)
-          // let hC = response.data;
-          // hC.forEach((i)=>{
             this.hotCityArr = response.data
-          // });
         });
         // 发起网络请求获取所有城市列表
         this.axios.get("https://elm.cangdu.org/v1/cities?type=group").then((res)=>{

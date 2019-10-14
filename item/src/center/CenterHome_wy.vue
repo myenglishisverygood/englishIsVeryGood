@@ -6,7 +6,7 @@
     </div>
     <div id="link">
       <div class="img_tx">
-        <a href="" class="tx"><img src="../../tx.jpeg" height="60rem" width="60rem"/></a>
+        <a href="" class="tx"><img src="./img/tx.jpeg" height="60rem" width="60rem"/></a>
       </div>
       <div class="cen">
         <router-link :to="{}" class="login">登录/注册</router-link>
@@ -21,7 +21,7 @@
     </div>
     <div class="info-data">
       <ul class="clear">
-        <router-link :to="{}" class="info-data-link">
+        <router-link :to="{path:'/balance'}" class="info-data-link">
             <span class="info-data-top">
               <b>0.00</b>元</span>
           <span class="info-data-bottom">我的余额</span>
@@ -69,7 +69,7 @@
           <a href="" class="glyphicon glyphicon-menu-right"></a>
         </div>
       </router-link>
-      <router-link :to="{}" class="myorder">
+      <router-link :to="{path:'/download'}" class="myorder">
         <i class="iconfont icon-elemo ee"></i>
         <div class="myorder-div">
           <span class="myorder-span">下载饿了么App</span>
@@ -77,12 +77,15 @@
         </div>
       </router-link>
     </div>
+    <foots></foots>
   </div>
 </template>
 
 <script>
+  import Foots from "../mpMain/foots";
   export default {
     name: "CenterHome_wy",
+    components: {Foots},
     data(){
       return {
         StoreImage:[]
