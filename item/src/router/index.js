@@ -18,7 +18,6 @@ import Search from '../mpMain/Search'
 import Dingdan from '../mpMain/Dingdan'
 //余额
 import Balance from "../myenglish/balance"
-
 //积分商城
 import Integral from "../center/Shop"
 //我的优惠
@@ -43,9 +42,18 @@ import HistroyRed from '../center/HistoryRed'
 import RedEv from '../center/RedEnvelopes'
 //推荐有礼
 import Prize from '../center/Prize'
-
 //重置密码
 import Repassword from '../myenglish/Repassword'
+// 用户信息页面
+import AccountInfo from '../myenglish/AccountInfo'
+// 会员中心
+import VipCenter from "../myenglish/VipCenter"
+//收货地址
+import GetAddress from '../myenglish/GetAddress'
+// 新增地址
+import Pushadd from '../center/NewAddress'
+//兑换会员
+import ExchangeVip from '../myenglish/ExchangeVip'
 Vue.use(Router)
 
 export default new Router({
@@ -58,7 +66,6 @@ export default new Router({
     {path:"/shopclass",component:Shopclass,name:'x'},
     {path:"/download",component:Download},
     {path:"/balance",component:Balance},
-
     {path:'/integral',component:Integral},
     {path:'/redpacket',component:RedPacket},
     {path:'/exchange',component:Exchange},
@@ -74,9 +81,11 @@ export default new Router({
     {path:'/hist',component:HistroyRed},
     {path:'/es',component:RedEv,name:'r'},
     {path:'/prize',component:Prize},
-    {path:'/repassword',component:Repassword}
-
-
-
+    {path:'/repassword',component:Repassword},
+    {path:'/accountinfo',component:AccountInfo},
+    {path:'/vipcenter',component:VipCenter},
+    {path:'/getaddress',component:GetAddress},
+    {path:'/pushadd',component:Pushadd},
+    {path:'/exvip',component:ExchangeVip}
   ]
 })

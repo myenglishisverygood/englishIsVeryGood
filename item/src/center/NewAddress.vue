@@ -87,23 +87,8 @@
             //警示消失
             this.input05 = false;
           }
-        }
-
+        },
       },
-      created(){
-          this.axios.post("https://elm.cangdu.org/v1/users/:user_id/addresses",
-            {
-              name:this.name,
-              address:this.address,
-              address_detail:this.address_detail,
-              phone:this.phone,
-              phone_bk:this.phone_bk
-
-            }).then((res)=>{
-            this.add=res.data;
-            console.log(res)
-          })
-      }
     }
 </script>
 

@@ -57,8 +57,8 @@
         altermes: "",
         hiddens: false,
         show: true,
-        flag:false
-
+        flag:false,
+        user_id:0
       }
 
     },
@@ -89,11 +89,18 @@
             console.log(res)
             //判断验证码是否输入正确
             if (!res.data.message) {
+              // 持久化存储user_id
+              if (!localStorage.getItem("user_id")) {
+                this.user_id = res.data.user_id;
+              } else {
+                this.user_id = JSON.parse(localStorage.getItem("user_id"));
+                this.user_id = res.data.user_id
+              }
+              localStorage.setItem("user_id", JSON.stringify(this.user_id))
               this.$router.push({path: "/center"});
             }else {
               this.hiddens = true
               this.altermes = res.data.message;
-              console.log(this.altermes);
             }
           }, (err) => {
             console.log(err);
@@ -118,7 +125,6 @@
         this.Code=res.data.code
         // console.log(res)
       })
-
 
     }
   }

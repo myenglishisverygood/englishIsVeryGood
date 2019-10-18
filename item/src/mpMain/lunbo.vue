@@ -43,7 +43,7 @@
       <i class="shop-img iconfont icon-shangjialiebiaoicon"></i><span class="shop-wz">附近商家</span>
     </div>
     <ul>
-      <li class="shop-n" v-for="(v,i) in arrshop" :key="i" @click="xiang">
+      <li class="shop-n" v-for="(v,i) in arrshop" :key="i" @click="xiang(v.id,i)">
         <div class="shop-z">
           <img :src="B+v.image_path" alt="" style="width: 5rem;height: 5rem;margin-left: 0.5rem">
         </div>
@@ -83,7 +83,7 @@
             latitude:"31.22967",
             longitude:"121.4762",
             yanse:"#3190e8",
-            zun:"57A9FF"
+            zun:"57A9FF",
             }
           },
         components:{
@@ -93,8 +93,8 @@
           tiao(){
             console.log("点击进入商品筛选页!");
           },
-          xiang(){
-            console.log("点击进入商铺详情页!");
+          xiang(id,index){
+            localStorage.setItem("detailId",JSON.stringify([id,index+1]))
           }
         },
         //设置轮播图--swiper
@@ -107,7 +107,6 @@
 
               },
             });
-
         },
         created(){
           this.axios.get("https://elm.cangdu.org/v2/index_entry").then((result)=>{
@@ -138,7 +137,7 @@
               limit:50
             }
             }).then((res)=>{
-            // console.log(res.data);
+            console.log(res.data[1]);
             this.arrshop=res.data;
           }).catch((err)=>{
             console.log(err);

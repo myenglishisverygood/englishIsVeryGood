@@ -2,7 +2,7 @@
   <nav class="navbar navbar-default navbar-fixed-top a">
           <i class="suo iconfont icon-sousuo" style="font-size: 1.5rem;color: white;" @click="suo"/>
     <div class="kua">
-      <span class="wz">{{title}}</span>
+      <span class="wz" @click="ret">{{title}}</span>
     </div>
       <i class="iconfont icon-dengluyonghuming navbar-text pull-right ren" style="font-size: 1.5rem;color: white;" @click="login"/>
   </nav>
@@ -32,6 +32,9 @@
           //登录点击
           login(){
             console.log("点击登录!");
+          },
+          ret(){
+            this.$router.push({path:"/changecity"})
           }
         },
     }

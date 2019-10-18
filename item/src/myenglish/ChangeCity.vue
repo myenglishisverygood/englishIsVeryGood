@@ -2,21 +2,26 @@
  <div id="oo">
    <div id="header">
      <span id="span1">ele.me</span>
-     <a href="###" id="a1" @click="login">登录/注册</a>
+     <div id="a1" @click="login">
+       <span v-if="user">登录/注册</span>
+       <img src="./img/user.png" v-if="userImg">
+     </div>
    </div>
    <div id="headernext">
      <div id="headernext1">
        <span id="span2">当前定位城市：</span>
-       <span id="span3">定位不准时，请在城市列表中选择</span>
+       <span id="span3">{{GPS}}</span>
      </div>
-     <a href="###" id="headernext2"></a>
+     <router-link id="headernext2" :to="{name:'p',query:{city:GPS}}">
+       <span class="glyphicon glyphicon-menu-right"></span>
+     </router-link>
    </div>
    <!--热门城市-->
    <div>
      <div class="hotCity">热门城市</div>
      <ul style="overflow: hidden">
        <li class="hotCityList"  v-for="(c,i) in hotCityArr" :key="i">
-         <router-link :to="{name:'p',params:{city:c.name,id:c.id}}">{{c.name}}</router-link>
+         <router-link :to="{name:'p',query: {city:c.name,id:c.id}}">{{c.name}}</router-link>
        </li>
      </ul>
    </div>
@@ -24,8 +29,8 @@
    <div v-for="(v,index) in cityLetter" :key="index">
      <p class="letter">{{v}}</p>
      <ul style="overflow: hidden;background: white">
-       <li v-for="(x,y) in allCityArr[v]" :key="y" class="citylink" @click="cityBtn">
-         <router-link :to="{name:'p',params:{city:x.name,id:x.id}}">{{x.name}}</router-link>
+       <li v-for="(x,y) in allCityArr[v]" :key="y" class="citylink">
+         <router-link :to="{name:'p',query: {city:x.name,id:x.id}}">{{x.name}}</router-link>
        </li>
      </ul>
    </div>
@@ -42,14 +47,20 @@
           // 所有城市开头字母的数组
           cityLetter:[],
           // 储存所有城市的数组
-          allCityArr:[]
+          allCityArr:[],
+          //定位
+          GPS:"定位不准时，请在城市列表中选择",
+          // 图片
+          userImg:false,
+          // 登录注册
+          user:true,
         }
       },
       methods:{
-        // 所有城市的点击事件
-        cityBtn(){},
         // 登陆注册点击事件
-        login(){}
+        login(){
+          this.$router.push({path:'/center'})
+        },
       },
       // 创建之后发起网络请求 获取城市信息
       created(){
@@ -62,7 +73,17 @@
           // 字母 A-Z 排序
           this.allCityArr = res.data;
           this.cityLetter = Object.keys(res.data).sort();
+        });
+        this.axios.get("https://elm.cangdu.org/v1/cities?type=guess").then((resp)=>{
+          if(resp.status == 200){
+            this.GPS = resp.data.name
+          }
         })
+        // 判断是否已经登录
+        if(localStorage.getItem("user_id")){
+          this.userImg = true;
+          this.user = false
+        }
       },
     };
 
@@ -128,6 +149,10 @@
     text-decoration: none;
     color: white;
   }
+  #a1>img{
+    width: 1.5rem;
+    height: 1.5rem;
+  }
   #headernext{
     width: 100%;
     height: 12%;
@@ -148,7 +173,7 @@
   }
   #span3{
     display: inline-block;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     font-weight: 900;
     color: #9f9f9f;
     margin: 0.8rem 0.5rem 0 0;
@@ -199,5 +224,10 @@
     border-bottom: 0.05rem solid #e4e4e4;
     border-top: 0.1rem solid #e4e4e4;
     font-size: 0.9rem;
+  }
+  .glyphicon{
+    position: relative;
+    left: 22rem;
+    top: 0.5rem;
   }
 </style>

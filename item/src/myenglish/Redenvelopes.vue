@@ -78,11 +78,12 @@
         },
         exnet(){
           this.axios.get("https://elm.cangdu.org/v1/user").then((res)=>{
-            this.axios.post("https://elm.cangdu.org/v1/users/:user_id/hongbao/exchange",{
+            let data = {
               user_id:res.data.id,
               exchange_code:this.exchange,
               captcha_code:this.code
-            }).then((suc)=>{
+            };
+            this.axios.post("https://elm.cangdu.org/v1/users/:user_id/hongbao/exchange",data).then((suc)=>{
               if (suc.data.message == "无效的兑换码"){
                 this.errcode = suc.data.message;
                 this.down = true

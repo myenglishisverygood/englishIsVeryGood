@@ -34,14 +34,32 @@
 <script>
     export default {
         name: "Repassword",
+      data(){
+        return {
+          // 账号
+          id:"",
+          // 旧密码
+          oldpassword:"",
+          // 新密码
+          newpassword:"",
+          // 确认新密码
+          affirmpassword:"",
+          // 验证码
+          authcode:"",
+          // 储存验证码图片路径
+          codeSrc:"",
+          hiddens:false,
+          altermes:""
+
+        }
+      },
         methods:{
           // 箭头点击事件
           leave(){
-            this.$router.push({path:'/login'})
+            this.$router.go(-1)
           },
           // 确认修改点击事件
           confirmC(){
-            // console.log(this.password, this.verification)
             //判断账号密码是否为空弹出框
             if (this.id == "") {
               this.hiddens = true;
@@ -63,11 +81,10 @@
                 confirmpassword:this.affirmpassword,
                 captcha_code:this.authcode
               }).then((res)=>{
-                console.log(this.authcode);
                 console.log(res)
-                if (!res.data.success){
+                if (res.data.success != ""){
                   this.hiddens=true;
-                  this.altermes=res.data.message;
+                  this.altermes=res.data.success;
                 }
               },(err)=>{
                 console.log(err)
@@ -76,7 +93,7 @@
 
           },
           logine() {
-            this.hiddens = false
+            this.$router.push({path:'/accountinfo'})
           },
           // 点击更换验证码
           changeImg(){
@@ -84,25 +101,6 @@
               console.log(res)
               this.codeSrc = res.data.code
             })
-          }
-        },
-        data(){
-          return {
-            // 账号
-            id:"",
-            // 旧密码
-            oldpassword:"",
-            // 新密码
-            newpassword:"",
-            // 确认新密码
-            affirmpassword:"",
-            // 验证码
-            authcode:"",
-            // 储存验证码图片路径
-            codeSrc:"",
-            hiddens:false,
-             altermes:""
-
           }
         },
         created(){
@@ -188,7 +186,7 @@
   }
   .pop{
     background: white;
-    width: 75%;
+    width: 85%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -196,8 +194,8 @@
     padding-top: 1rem;
     border-radius: 0.6rem;
     position: absolute;
-    top: 24%;
-    left: 12%;
+    top: 35%;
+    left: 7.5%;
   }
   .raw{
     width: 4.5rem;

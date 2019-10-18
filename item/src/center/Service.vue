@@ -43,14 +43,11 @@
       created() {
         this.axios.get("https://elm.cangdu.org/v3/profile/explain").then((response)=>{
           this.products = response.data;
-          console.log(this.products);
           let keyArr = Object.keys(this.products);
           keyArr.splice(keyArr.indexOf("index"), 1);
-          console.log(keyArr);
           for (let i = 0; i < keyArr.length; i += 2) {
             this.ccc.push(this.products[keyArr[i + 1]]);
             this.cc.push(this.products[keyArr[i]]) ;
-            console.log(this.cc);
           }
         }, (err) => {
           console.log(err);

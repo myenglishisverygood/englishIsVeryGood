@@ -23,17 +23,17 @@
       <ul class="clear">
         <router-link :to="{path:'/balance'}" class="info-data-link">
             <span class="info-data-top">
-              <b>0.00</b>元</span>
+              <b>{{balance}}.00</b>元</span>
           <span class="info-data-bottom">我的余额</span>
         </router-link>
         <router-link :to="{path:'/redpacket'}" class="info-data-link">
             <span class="info-data-top cent">
-              <b>3</b>个</span>
+              <b>{{gift_amount}}</b>个</span>
           <span class="info-data-bottom">我的优惠</span>
         </router-link>
         <router-link :to="{path:'/integration'}" class="info-data-link">
             <span class="info-data-top bott">
-              <b>0</b>个</span>
+              <b>{{point}}</b>个</span>
           <span class="info-data-bottom">我的积分</span>
         </router-link>
       </ul>
@@ -53,7 +53,7 @@
           <a href="" class="glyphicon glyphicon-menu-right"></a>
         </div>
       </router-link>
-      <router-link :to="{}" class="myorder">
+      <router-link :to="{path:'/vipcenter'}" class="myorder">
         <i class="iconfont icon-huangguan cc"></i>
         <div class="myorder-div">
           <span class="myorder-span">饿了么会员卡</span>
@@ -83,36 +83,46 @@
 
 <script>
   import Foots from "../mpMain/foots";
+
   export default {
     name: "CenterHome_wy",
     components: {Foots},
-    data(){
+    data() {
       return {
-        StoreImage:[],
-        usernameAll:"登录/注册",
-        ress:""
+        StoreImage: [],
+        usernameAll: "登录/注册",
+        ress: "",
+        gift_amount:0,
+        balance:0,
+        point:0
       }
-
     },
-    methods:{
-      login(){
-          this.$router.push({path:'/login'})
+    methods: {
+      login() {
+        if(this.ress != ""){
+          this.$router.push({path:"/accountinfo"})
+        }else {
+          this.$router.push({path: '/login'})
         }
-
+      },
     },
-created(){
-      this.axios.get("https://elm.cangdu.org/v1/user").then((res)=>{
-        console.log(res);
-        this.usernameAll
-        if (res.data.username != "") {
-          this.usernameAll = res.data.username;
-          this.ress=res.data.username;
-        } else {
-          this.usernameAll = "登录/注册";
-        }
-      })
-}
 
+    created() {
+      if(localStorage.getItem("user_id")){
+        this.axios.get("https://elm.cangdu.org/v1/user").then((res) => {
+          this.usernameAll
+          if (res.data.username != "") {
+            this.usernameAll = res.data.username;
+            this.ress = res.data.username;
+          }
+          this.gift_amount = res.data.gift_amount;
+          this.balance = res.data.balance;
+          this.point = res.data.point
+        })
+      }else {
+        this.usernameAll = "登录/注册";
+      }
+    }
   }
 </script>
 
@@ -122,19 +132,22 @@ created(){
   @import "//at.alicdn.com/t/font_1453437_8sw1dqtneoq.css";
   @import "//at.alicdn.com/t/font_1453437_z5gu7787uq.css";
   @import "//at.alicdn.com/t/font_1453437_97ps2ike755.css";
-  #wrap{
+
+  #wrap {
     width: 100%;
     height: 100%;
-    background:rgb(245,245,245) ;
+    background: rgb(245, 245, 245);
     /*overflow: hidden;*/
   }
-  #head_top{
-    height:3rem;
-    background:rgb(49,144,233);
+
+  #head_top {
+    height: 3rem;
+    background: rgb(49, 144, 233);
     text-align: center;
     /*overflow: hidden;*/
   }
-  .me{
+
+  .me {
     font-size: 1.3rem;
     color: white;
     display: inline-block;
@@ -142,61 +155,67 @@ created(){
     margin-top: 0.4rem;
 
   }
-  .left{
+
+  .left {
     font-size: 1.4rem;
     color: white;
     float: left;
     margin-top: 0.4rem;
     margin-left: 0.2rem;
   }
-  #link{
+
+  #link {
     height: 5rem;
-    background-color:#3190e8;
+    background-color: #3190e8;
     /*overflow: hidden;*/
     height: 5rem;
   }
-  .img_tx{
+
+  .img_tx {
     float: left;
     margin-left: 2rem;
     width: 15%;
 
   }
-  .tx img{
+
+  .tx img {
     border-radius: 50%;
     margin-top: 0.5rem;
     width: 3rem;
     height: 3rem;
   }
-  .login{
+
+  .login {
     color: white;
     font-size: 1.2rem;
     font-weight: 800;
     font-family: "Helvetica Neue";
     width: 85%;
 
-
-
   }
-  .phone{
+
+  .phone {
 
     color: white;
     font-size: 1rem;
 
   }
-  .num{
+
+  .num {
     color: white;
     font-size: 1rem;
 
-
   }
-  .right{
+
+  .right {
 
     color: white;
     font-size: 1rem;
     margin-left: 7rem;
 
   }
-  .cen{
+
+  .cen {
     float: left;
     margin-top: 0.5rem;
     margin-left: 0.5rem;
@@ -204,66 +223,75 @@ created(){
 
   }
 
-.info-data{
-  width: 100%;
-  height: 5rem;
-  background-color:white;
-  /*box-sizing: border-box;*/
-  /*overflow: hidden;*/
+  .info-data {
+    width: 100%;
+    height: 5rem;
+    background-color: white;
+    /*box-sizing: border-box;*/
+    /*overflow: hidden;*/
 
-}
-.clear{
-  zoom: 1;
-}
-   .info-data-link{
-  float: left;
-  width: 33%;
-   height: 5rem;
-  display: block;
-  border-right: 1px solid #f1f1f1;
+  }
 
-}
-  .info-data-top{
+  .clear {
+    zoom: 1;
+  }
+
+  .info-data-link {
+    float: left;
+    width: 33%;
+    height: 5rem;
+    display: block;
+    border-right: 1px solid #f1f1f1;
+
+  }
+
+  .info-data-top {
     font-size: .88rem;
     color: #333;
     padding: .853333rem 0 .453333rem;
   }
-   .info-data-top b {
+
+  .info-data-top b {
     display: inline-block;
     font-size: 1.5rem;
     color: #f90;
     font-weight: 700;
     line-height: 1rem;
-    font-family: Helvetica Neue,Tahoma;
+    font-family: Helvetica Neue, Tahoma;
   }
-  .info-data-bottom{
+
+  .info-data-bottom {
     font-size: .8rem;
     color: #666;
     font-weight: 400;
     padding-bottom: .453333rem;
   }
-   .info-data-link span{
+
+  .info-data-link span {
     display: block;
     width: 100%;
     text-align: center;
   }
-   .aa{
-     color: red;
 
-   }
-   .profile{
-     margin-top: .4rem;
-     background: white;
+  .aa {
+    color: red;
 
-   }
-  .myorder{
+  }
+
+  .profile {
+    margin-top: .4rem;
+    background: white;
+
+  }
+
+  .myorder {
     padding-left: 1.6rem;
     display: flex;
     align-items: center;
     /*height: 3rem;*/
   }
 
-  .myorder-div{
+  .myorder-div {
     width: 100%;
     border-bottom: 1px solid #f1f1f1;
     padding: .533333rem .266667rem .433333rem 0;
@@ -274,22 +302,27 @@ created(){
     justify-content: space-between;
   }
 
-.bb{
-  color: #f90;
-}
-.cc{
- color: yellow;
-}
-.ee{
-  color: blue;
-}
-  .empty{
+  .bb {
+    color: #f90;
+  }
+
+  .cc {
+    color: yellow;
+  }
+
+  .ee {
+    color: blue;
+  }
+
+  .empty {
     clear: both;
   }
-  .cent b{
+
+  .cent b {
     color: #ff5f3e;
   }
-  .bott b{
+
+  .bott b {
     color: #6ac20b;
   }
 </style>
