@@ -1,5 +1,6 @@
 <template>
   <div>
+    <span>{{huan}}</span>
     <nav class="navbar navbar-fixed-bottom navbottom">
       <div class="shou1 x" @click="shou">
         <img :src="e1" alt="" style="width: 1.3rem;height: 1.3rem">
@@ -38,47 +39,43 @@
         },
         methods:{
            shou(){
-             if (this.a){
-               this.e1=require('@/assets/image/bottom1.png');
-               this.a=false;
-             } else if (this.a =!this.a) {
-               this.e1=require('@/assets/image/bottom11.png');
-             }
+             this.a=true;
+             this.yan=false;
+             this.yan1=false;
+             this.yan2=false;
               this.$router.push({path:"/home"})
             },
            sou(){
-             if (this.a){
-               this.a=false;
-               console.log("点击跳转到搜索页面!");
-               this.yan = true;
-             } else if (this.a =!this.a) {
-               this.yan = false;
-             }
+             this.a=false;
+             this.yan=true;
+             this.yan1=false;
+             this.yan2=false;
             this.$router.push({path:'/search'})
 
            },
          ding(){
-            if (this.a){
-
-              this.a=false;
-              console.log("点击跳转到搜索页面!");
-              this.yan1 = true;
-            } else if (this.a =!this.a) {
-              this.yan1 = false;
-            }
+           this.a=false;
+           this.yan=false;
+           this.yan1=true;
+           this.yan2=false;
             this.$router.push({path:'/dingdan'})
           },
           my(){
-            if (this.a){
-
-              this.a=false;
-              console.log("点击跳转到搜索页面!");
-              this.yan2 = true;
-            } else if (this.a =!this.a) {
-              this.yan2 = false;
-            }
+            this.a=false;
+            this.yan=false;
+            this.yan1=false;
+            this.yan2=true;
             this.$router.push({path:'/center'})
 
+          }
+        },
+        computed:{
+          huan(){
+            if (this.a){
+              this.e1=require('@/assets/image/bottom11.png');
+            } else {
+              this.e1=require('@/assets/image/bottom1.png');
+            }
           }
         }
     };
@@ -130,7 +127,7 @@
     border: 1px solid rgb(245,245,245);
   }
   .p{
-    line-height:0.8rem;
+    line-height:1rem;
   }
   .x{
     width: 2.5rem;
@@ -139,7 +136,7 @@
     /*background: aqua;*/
   }
   .shou1-wz{
-    margin-top: 0.2rem;
+    margin-top: 0.5rem;
     font-size: 0.5rem;
     color: #666;
     font-weight: 300;
