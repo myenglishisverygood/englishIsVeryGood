@@ -1,151 +1,261 @@
 <template>
-    <div class="wrap">
-      <div class="head_top">
-        新增地址
-        <router-link :to="{path:'/center'}"><span class="glyphicon glyphicon-menu-left" ></span>
-        </router-link>
-      </div>
-      <form>
-        <div class="adddetail">
-          <div class="input-new">
-            <input type="text" placeholder="请填写你的姓名" @input="jinggaoname" v-model="name"/>
-            <p v-if="input01" class="jinggao">请填写你的姓名</p>
-          </div>
-          <div class="input-new">
-            <input type="text" placeholder="小区/写字楼/学校等">
-          </div>
-          <div class="input-new">
-            <input type="text" placeholder="请填写详细送餐地址" @input="jinggaoaddress" v-model="address_detail"/>
-            <p v-if="input03" class="jinggao">送餐地址太短了,不能辨识</p>
-          </div>
-          <div class="input-new">
-            <input type="text" placeholder="请填写能够联系到您的手机号" @input="phones" v-model="phone"/>
-            <p v-if="input04" class="jinggao">请输入正确的手机号</p>
-          </div>
-          <div class="input-new">
-            <input type="text" placeholder="备用联系电话(选填)" @input="phonebf" v-model="phone_bk"/>
-            <p v-if="input05" class="jinggao">请输入正确的手机号</p>
-          </div>
-        </div>
-        <div class="addbutton">
-          <button>新增地址</button>
-        </div>
-
-      </form>
+  <div>
+    <div class="bm">
+      <router-link :to="{path:'/getaddress'}">
+        <i class="iconfont icon-zuojian" style="line-height: 2.5rem; font-size: 1rem;color: white"></i>
+      </router-link>
+      <span class="bmi">新增地址</span>
     </div>
+    <div class="huo">
+      <div class="inpt ins">
+        <input type="text" :class="inpu1" placeholder="请填写你的性名" :maxlength='10' v-model="zz" @keydown="dian">
+        <p class="pp" v-if="aa">请填写您的性名</p>
+      </div>
+      <router-link class="inpt" :to="{path: '/bSou',query:{zz:zz,bb:bb,vv:vv,nn:nn}}">
+        <input type="text" class="inpu1" placeholder="小区/写字楼/学校等" v-model="mm">
+      </router-link>
+      <div class="inpt inn">
+        <input type="text" :class="inpu2" placeholder="请填写详细送餐地址"  v-model="xx" @keydown="dian1">
+        <p class="pp" v-if="bb">送餐地址太短了，不能识别</p>
+      </div>
+      <div class="inpt">
+        <input type="text" :class="inpu3" placeholder="请填写能够联系到您的手机号" v-model="vv" @keydown="dian2">
+        <p class="pp" v-if="cc">{{shou}}</p>
+      </div>
+      <div class="inpt">
+        <input type="text" :class="inpu4" placeholder="备用联系电话" v-model="nn" @keydown="dian3">
+        <p class="pp" v-if="dd">{{shou1}}</p>
+      </div>
+    </div>
+    <div class="xdi">
+      <button :class="xque"  disabled=""  v-if="qq">新增地址</button>
+      <button :class="xque"  @click="ssss" v-if="!qq">新增地址</button>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "NewAddress",
-      data(){
-          return{
-            input:[],
-            address:"",
-            address_detail:"",
-            name:"",
-            phone:"",
-            phone_bk:"",
-            //存储p标签的显隐
-            input01:false,
-            input03:false,
-            input04:false,
-            input05:false
+  export default {
+    name: "NewAddress",
+    data(){
+      return{
+        xque:'xque',
+        qq:true,
+        shou:'',
+        shou1:'',
+        zz:'',
+        mm:'',
+        xx:'',
+        vv:'',
+        nn:'',
+        ww:'',
+        aa:false,
+        bb:false,
+        cc:false,
+        dd:false,
+        inpu1:"inpu1",
+        inpu2:"inpu1",
+        inpu3:"inpu1",
+        inpu4:"inpu1",
 
-          }
+      }
+    },
+    methods:{
+      dian(){
+        if (this.zz != ''&&this.zz.length<=10) {
+          this.qq = false;
+          this.xque = "xque1";
+          this.aa=true;
+          this.inpu1="inpu11"
+        }else {
+          this.aa=false;
+          this.inpu1="inpu1"
+          this.qq = true;
+          this.xque = "xque";
+        }
       },
-      methods:{
-        jinggaoname(){
-          if (this.name==""){
-            this.input01=true;
-          } else {
-            this.input01=false;
-          }
-        },
-        jinggaoaddress(){
-          if (this.address_detail.length < 3){
-            this.input03=true;
-          } else {
-            this.input03=false;
-          }
-        },
-        phones(){
-          //判断如果值不是正常手机号，出现警示
-          if (!(/^1[34578]\d{9}$/.test(this.phone-0))){
-            this.input04 = true;
-          } else{
-            //警示消失
-            this.input04 = false;
-            //控制确定按钮文字颜色是否点亮
-          };
-        },
-        phonebf(){
-          //判断如果值不是正常手机号，出现警示
-          if (!(/^1[34578]\d{9}$/.test(this.phone_bk-0))){
-            this.input05 = true;
-          } else {
-            //警示消失
-            this.input05 = false;
-          }
-        },
+      dian1(){
+        if (this.xx!=''&&this.xx.length<=5){
+          this.qq = false;
+          this.xque = "xque1";
+          this.bb=true;
+          this.inpu2="inpu11"
+        }else {
+          this.bb=false;
+          this.inpu2="inpu1"
+          this.qq = false;
+          this.xque = "xque1";
+        }
       },
+      dian2(){
+        if (this.vv ==='') {
+          this.shou="手机号码不能为空";
+          this.cc=true;
+          this.inpu3="inpu11"
+          this.qq = true;
+          this.xque = "xque";
+        } else {
+          var reg=/^1[3456789]\d{8}$/;
+          if(!reg.test(this.vv)){
+            this.qq = false;
+            this.xque = "xque1";
+            this.shou="请输入有效的手机号码";
+            this.cc=true;
+            this.inpu3="inpu11"
+          }else {
+            this.cc=false;
+            this.inpu3="inpu1"
+          }
+        }
+      },
+      dian3(){
+        if (this.nn ==='') {
+          this.shou1="手机号码不能为空";
+          this.dd=true;
+          this.inpu4="inpu11";
+          this.qq = false;
+          this.xque = "xque1";
+        } else {
+          var reg=/^1[3456789]\d{8}$/;
+          if(!reg.test(this.nn)){
+            this.shou1="请输入有效的手机号码";
+            this.dd=true;
+            this.inpu4="inpu11";
+            this.qq = false;
+            this.xque = "xque1";
+          }else {
+            this.dd=false;
+            this.inpu4="inpu1";
+            this.qq = false;
+            this.xque = "xque1";
+          }
+
+        }
+      },
+      ssss(){
+        let arrs = [];
+        const info = { name:this.zz, phone: this.vv };
+        if(!localStorage.getItem("houw")){
+          arrs.push(info);
+        }else{
+          arrs=JSON.parse(localStorage.getItem('houw'));
+          arrs.push(info);
+        }
+        localStorage.setItem("houw",JSON.stringify(arrs));
+        this.$router.push({path:'/getaddress'})
+        console.log(1234)
+      },
+    },
+    created(){
+      this.mm= this.$route.params.name;
+      this.zz=this.$route.params.up.zz;
+      this.bb=this.$route.params.up.bb;
+      this.vv=this.$route.params.up.vv;
+      this.nn=this.$route.params.up.nn;
+      console.log( this.$route.params.up);
     }
+  }
+
 </script>
 
 <style scoped>
-  .head_top{
-    background: #3190e8;
-    width:100%;
-    height:2.9rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    text-align: center;
-    line-height: 2.55rem;
-    color: white;
-    font-family: "Microsoft YaHei";
+  @import "//at.alicdn.com/t/font_1453346_v5w9ntjvvt.css";
+  .inn{
+    margin-top: 0.3rem;
   }
-  .glyphicon{
+  .bm{
+    background-color: #3190e8;
+    z-index: 100;
+    width: 100%;
+    height: 2.5rem;
+    position: relative;
+  }
+  .ins{
+    padding-top: 0.3rem;
+  }
+  .bmi{
     position: absolute;
-    top: 0.7rem;
-    left: 0.6rem;
-    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 50%;
+    color: #fff;
+    text-align: center;
   }
-  .adddetail{
-    background: #fff;
-    padding-top: .4rem;
+  .huo{
+    margin-top: .4rem;
+    padding: 0;
+    text-decoration: none;
+    border: none;
+    color: #333;
+    font-weight: 400;
+    background-color: white;
+    font-family: Microsoft Yahei;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
   }
-  .input-new{
-    padding-bottom: .6rem;
+  .inpt{
+    padding-bottom: 0.3rem;
   }
-  .input-new input{
+  .inpu1{
     display: block;
-    width: 95%;
-    font-size: 1rem;
+    color: black;
+    width: 90%;
+    height: 2rem;
+    font-size: .8rem;
     margin: 0 auto;
-    padding: .5rem;
+    padding: .3rem;
     background: #f2f2f2;
     border: 1px solid #ddd;
     border-radius: 3px;
   }
-  .addbutton{
+  .inpu11{
+    display: block;
+    width: 90%;
+    height: 2rem;
+    font-size: .8rem;
+    margin: 0 auto;
+    padding: .3rem;
+    background: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    border: 0.01rem solid red;
+  }
+  .pp{
+    font-size: .6rem;
+    color: #ea3106;
+    padding-left: .9rem;
+    margin-top: .1rem;
+  }
+  .xdi{
     margin: .6rem auto;
-    width: 95%;
+    width: 90%;
     background: #4cd964;
     border-radius: 3px;
   }
-  .addbutton button{
+  .xque1{
     width: 100%;
-    font-size: 1rem;
+    font-size: .8rem;
+    border: none;
     color: #fff;
-    line-height: 2.6rem;
+    line-height: 1.6rem;
     background: none;
-    font-weight: 800;
+    font-weight: 700;
     opacity: .6;
+    transition: all .4s;
+    opacity: 1;
   }
-  .jinggao{
-    font-size: 0.7rem;
-    color: #ea3106;
-    margin-left: 0.5rem;
-    margin-top: 0.2rem;
+  .xque{
+    width: 100%;
+    font-size: .8rem;
+    border: none;
+    color: #999;
+    line-height: 1.6rem;
+    background: none;
+    font-weight: 700;
+    opacity: .6;
+    transition: all .4s;
+    opacity: 1;
   }
 </style>

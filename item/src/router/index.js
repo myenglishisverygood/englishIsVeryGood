@@ -60,6 +60,8 @@ import StoreDetail from '../mpMain/Details'
 // 修改用户名
 import Changeusername from '../myenglish/ChangeUsername'
 import Shou from '../mpMain/shou'
+//地址搜索
+import SuoS from '../center/SuoS'
 Vue.use(Router)
 
 export default new Router({
@@ -95,9 +97,10 @@ export default new Router({
     {path:'/accountinfo',component:AccountInfo},
     {path:'/vipcenter',component:VipCenter},
     {path:'/getaddress',component:GetAddress},
-    {path:'/pushadd',component:Pushadd},
+    {path:'/pushadd',component:Pushadd,name:'bb'},
     {path:'/exvip',component:ExchangeVip},
     {path:'/storedetail',component:StoreDetail},
-    {path:'/changeusername',component:Changeusername}
+    {path:'/changeusername',component:Changeusername},
+    {path:'/bSou',component:SuoS}
   ]
 })

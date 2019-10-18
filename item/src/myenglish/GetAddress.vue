@@ -1,91 +1,130 @@
 <template>
-    <div id="GetAddress">
-      <div class="title">
-        <img src="./img/箭头.png" alt="" @click="leave">
-        <span>编辑地址</span>
-        <span @click="redactspan">{{redact}}</span>
-      </div>
-      <div class="addAddress" @click="add">
-        <span>新增地址</span>
-        <span class="glyphicon glyphicon-menu-right"></span>
-      </div>
+  <div class="app">
+    <div class="bm">
+      <router-link :to="{path:'/accountinfo'}">
+        <i class="iconfont icon-zuojian" style="line-height: 2.5rem; font-size: 1rem;color: white"></i>
+      </router-link>
+      <span class="bmi">编辑地址</span>
+      <span class="bian" @click="zt" >{{state}}</span>
     </div>
+    <ul v-for="(v,i) in shu" :key="i" class="dong">
+      <div class="mmm">
+        <li class="vv">{{v.name}}</li>
+        <li class="nn">{{v.phone}}</li>
+      </div>
+      <span @click="sss(i)" class="shan" v-if="ss">x</span>
+    </ul>
+    <router-link :to="{path:'/pushadd'}">
+      <div class="xin">
+        <span class="xin1">新增地址</span>
+        <i class="iconfont icon-you" style="color: #999;padding-top: 0.6rem"></i>
+      </div>
+    </router-link>
+
+  </div>
 </template>
 
 <script>
-    export default {
-      name: "GetAddress",
-      data(){
-        return {
-          redact:"编辑",
-        }
-      },
-      methods:{
-        leave(){
-          this.$router.push({path:'/accountinfo'})
-        },
-        add(){
-          this.$router.push({path:'/pushadd'})
-        },
-        redactspan(){
-          if(this.redact == "编辑"){
-            this.redact = "完成"
-          }else if (this.redact == "完成"){
-            this.redact = '编辑'
-          }
-        }
+  export default {
+    name: "GetAddress",
+    data(){
+      return{
+        shu:[],
+        state:"编辑",
+        acc:true,
+        ss:true
       }
+    },
+    methods:{
+      aa(){
+        var ct=JSON.parse(localStorage.getItem('houw'));
+        this.shu=ct;
+        console.log(ct)
+      },
+      sss(index){
+        this.shu.splice(index,1);
+        localStorage.setItem("houw",JSON.stringify(this.shu));
+      },
+      zt(){
+        if (this.state=='编辑') {
+          this.state="完成"
+          this.ss=true;
+        }else if (this.state=='完成') {
+          this.state="编辑"
+          this.ss=false
+
+        }
+        this.acc=!this.acc;
+      }
+    },
+    created(){
+      this.aa();
     }
+  }
 </script>
 
 <style scoped>
-  #GetAddress{
-    width: 100%;
-    height: 100%;
-    background: #f5f5f5;
-  }
-  .title{
-    width: 100%;
-    background: rgb(49,144,232);
-    height: 2.7rem;
-    text-align: center;
-    line-height: 2.7rem;
-    font-size: 1.2rem;
-    color: white;
-    font-weight: 700;
-    position: relative;
-  }
-  .title>img{
-    height: 1.6rem;
-    width: 1.8rem;
-    position: relative;
-    right: 8rem;
-  }
-  .title>span:nth-child(3){
-    font-size: 1rem;
-    font-weight: normal;
-    color: white;
-    position: absolute;
-    right: 1rem;
-  }
-  .addAddress{
+  @import "//at.alicdn.com/t/font_1453346_v5w9ntjvvt.css";
+  @import "//at.alicdn.com/t/font_1453346_y1nxc20b35h.css";
+  .bm{
+    background-color: #3190e8;
+    z-index: 100;
     width: 100%;
     height: 2.5rem;
-    background: white;
-    margin-top: 1.2rem;
-    border-top: 1px solid #e4e4e4;
-    border-bottom: 1px solid #e4e4e4;
-    line-height: 2.5rem;
-    padding: 0 1rem 0 1rem;
+    position: relative;
+    overflow: hidden;
   }
-  .addAddress>span{
-    display: block;
+  .bmi{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 50%;
+    color: #fff;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 800;
   }
-  .addAddress>span:nth-child(1){
-    float: left;
-  }
-  .addAddress>span:nth-child(2){
+  .bian{
     float: right;
-    margin-top: .7rem;
+    color: white;
+    font-size: 0.9rem;
+    padding-top: 0.7rem;
+    padding-right: 0.2rem;
   }
+  .xin{
+    margin-top: .6rem;
+    background: #fff;
+    padding: .2rem .4rem;
+    border-top: 1px solid #d9d9d9;
+    display: flex;
+    justify-content: space-between;
+    height: 3rem;
+    border-bottom: 1px solid #d9d9d9;
+
+  }
+  .xin1{
+    display: block;
+    font-size: .9rem;
+    color: #666;
+    line-height: 3rem;
+
+  }
+  .dong{
+    border-bottom: 0.02rem solid #999;
+    padding: 0.5rem;
+    width: 100%;
+    color: black;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+  }
+  .shan{
+    color: #999;
+    padding: 0 0.5rem;
+    font-size: 1.5rem;
+
+
+  }
+
 </style>
