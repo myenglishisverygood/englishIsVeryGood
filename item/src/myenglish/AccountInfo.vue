@@ -116,7 +116,7 @@
 
       //返回
       leave() {
-        this.$router.push({path: '/center'})
+        this.$router.push({path: '/home/center'})
       },
       //修改用户名
       changeUsername() {
@@ -138,7 +138,7 @@
         this.axios.get("https://elm.cangdu.org/v2/signout").then((res)=>{
           if(res.data.status == 1){
             window.localStorage.removeItem("user_id")
-            this.$router.push({path:'/center'})
+            this.$router.push({path:'/home/center'})
           }
         });
 

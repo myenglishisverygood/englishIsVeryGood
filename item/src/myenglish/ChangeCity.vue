@@ -59,7 +59,7 @@
       methods:{
         // 登陆注册点击事件
         login(){
-          this.$router.push({path:'/center'})
+          this.$router.push({path:'/home/center'})
         },
       },
       // 创建之后发起网络请求 获取城市信息

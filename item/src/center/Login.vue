@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="head_top">
       密码登录
-      <router-link :to="{path:'/center'}"><span class="glyphicon glyphicon-menu-left" ></span>
+      <router-link :to="{path:'/home/center'}"><span class="glyphicon glyphicon-menu-left" ></span>
       </router-link>
     </div>
     <form class="loginfrom">
@@ -97,7 +97,7 @@
                 this.user_id = res.data.user_id
               }
               localStorage.setItem("user_id", JSON.stringify(this.user_id))
-              this.$router.push({path: "/center"});
+              this.$router.push({path: "/home/center"});
             }else {
               this.hiddens = true
               this.altermes = res.data.message;
