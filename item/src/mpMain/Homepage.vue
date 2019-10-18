@@ -1,18 +1,17 @@
 <template>
     <div id="Homepage">
-      <Header></Header>
-      <lunbo></lunbo>
+      <router-view></router-view>
       <foots></foots>
     </div>
 </template>
 
 <script>
-    import Header from "./Header";
-    import Lunbo from "./lunbo";
+
     import Foots from "./foots";
+    import Shou from "./shou";
     export default {
       name: "Homepage",
-      components: {Foots, Lunbo, Header},
+      components: {Shou, Foots},
       data(){
         return {
           headerAddress :""

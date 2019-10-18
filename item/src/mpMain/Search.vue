@@ -42,7 +42,6 @@
         <li class="foot-wz" @click="qingkong"><span class="foot-wzs">清空搜索历史</span></li>
       </ul>
     </div>
-    <foots></foots>
   </div>
 </template>
 

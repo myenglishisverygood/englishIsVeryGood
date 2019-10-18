@@ -137,7 +137,10 @@
               limit:50
             }
             }).then((res)=>{
+
             console.log(res.data[1]);
+
+            console.log(res.data);
             this.arrshop=res.data;
           }).catch((err)=>{
             console.log(err);

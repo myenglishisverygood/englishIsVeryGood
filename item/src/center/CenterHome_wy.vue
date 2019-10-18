@@ -77,7 +77,6 @@
         </div>
       </router-link>
     </div>
-    <foots></foots>
   </div>
 </template>
 

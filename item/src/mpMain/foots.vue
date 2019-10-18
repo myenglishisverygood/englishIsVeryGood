@@ -43,14 +43,14 @@
              this.yan=false;
              this.yan1=false;
              this.yan2=false;
-              this.$router.push({path:"/home"})
+              this.$router.push({path:"/home/h"})
             },
            sou(){
              this.a=false;
              this.yan=true;
              this.yan1=false;
              this.yan2=false;
-            this.$router.push({path:'/search'})
+            this.$router.push({path:'/home/s'})
 
            },
          ding(){
@@ -58,14 +58,14 @@
            this.yan=false;
            this.yan1=true;
            this.yan2=false;
-            this.$router.push({path:'/dingdan'})
+            this.$router.push({path:'/home/dingdan'})
           },
           my(){
             this.a=false;
             this.yan=false;
             this.yan1=false;
             this.yan2=true;
-            this.$router.push({path:'/center'})
+            this.$router.push({path:'/home/center'})
 
           }
         },

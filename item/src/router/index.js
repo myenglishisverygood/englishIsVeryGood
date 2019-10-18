@@ -54,6 +54,8 @@ import GetAddress from '../myenglish/GetAddress'
 import Pushadd from '../center/NewAddress'
 //兑换会员
 import ExchangeVip from '../myenglish/ExchangeVip'
+
+import Shou from '../mpMain/shou'
 Vue.use(Router)
 
 export default new Router({
@@ -61,8 +63,12 @@ export default new Router({
     {path:"/",redirect:"/changecity"},
     {path:"/changecity",component:ChangeCity},
     {path:"/seachadd",component:Address,name:"p"},
-    {path:"/center",component:Center},
-    {path:"/home",component:Homepage,name:"j"},
+    {path:"/home",component:Homepage,name:"j",redirect:"/home/h",children:[
+        {path:"/home/h",component:Shou},
+        {path:"/home/s",component:Search},
+        {path:"/home/dingdan",component:Dingdan},
+        {path:"/home/center",component:Center}
+      ]},
     {path:"/shopclass",component:Shopclass,name:'x'},
     {path:"/download",component:Download},
     {path:"/balance",component:Balance},
@@ -72,7 +78,6 @@ export default new Router({
     {path:'/integration',component:jifen},
     {path:'/explain',component:Explain,name:'k'},
     {path:'/inter',component:jifen},
-    {path:'/dingdan',component:Dingdan},
     {path:'/search',component:Search},
     {path:'/server',component:Server},
     {path:'/context',component:Context,name:"context"},
