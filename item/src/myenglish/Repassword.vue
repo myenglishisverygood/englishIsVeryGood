@@ -18,9 +18,16 @@
             <p @click="changeImg">换一张</p>
           </div>
         </div>
-
       </div>
       <div class="confirmChange" @click="confirmC">确认修改</div>
+      <div class="pop bounceIn" v-if="hiddens">
+        <div class="raw">
+          <span class="ver"></span>
+          <span class="poi"></span>
+        </div>
+        <div class="cty">{{altermes}}</div>
+        <div class="confrim" @click="logine">确认</div>
+      </div>
     </div>
 </template>
 
@@ -29,19 +36,47 @@
         name: "Repassword",
         methods:{
           // 箭头点击事件
-          leave(){},
+          leave(){
+            this.$router.push({path:'/login'})
+          },
           // 确认修改点击事件
           confirmC(){
-            this.axios.post("https://elm.cangdu.org/v2/changepassword",{
-              username:this.id,
-              oldpassWord:this.oldpassword,
-              newpassword:this.newpassword,
-              confirmpassword:this.affirmpassword,
-              captcha_code:this.authcode
-            }).then((res)=>{
-              console.log(this.authcode);
-              console.log(res)
-            })
+            // console.log(this.password, this.verification)
+            //判断账号密码是否为空弹出框
+            if (this.id == "") {
+              this.hiddens = true;
+              this.altermes = "用户名不能为空"
+            } else if (this.oldpassword == "") {
+              this.hiddens = true;
+              this.altermes="密码不能为空"
+            }else if(this.newpassword==""){
+              this.hiddens=true;
+              this.altermes="新密码不能为空"
+            }else if (this.affirmpassword!=this.newpassword){
+              this.hiddens=true;
+              this.altermes="两次输入的密码不一致"
+            }else {
+              this.axios.post("https://elm.cangdu.org/v2/changepassword",{
+                username:this.id,
+                oldpassWord:this.oldpassword,
+                newpassword:this.newpassword,
+                confirmpassword:this.affirmpassword,
+                captcha_code:this.authcode
+              }).then((res)=>{
+                console.log(this.authcode);
+                console.log(res)
+                if (!res.data.success){
+                  this.hiddens=true;
+                  this.altermes=res.data.message;
+                }
+              },(err)=>{
+                console.log(err)
+              })
+            }
+
+          },
+          logine() {
+            this.hiddens = false
           },
           // 点击更换验证码
           changeImg(){
@@ -64,7 +99,10 @@
             // 验证码
             authcode:"",
             // 储存验证码图片路径
-            codeSrc:""
+            codeSrc:"",
+            hiddens:false,
+             altermes:""
+
           }
         },
         created(){
@@ -147,5 +185,71 @@
   }
   .changeCode>p:nth-child(2){
     color: rgb(59,149,233);
+  }
+  .pop{
+    background: white;
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 1rem;
+    border-radius: 0.6rem;
+    position: absolute;
+    top: 24%;
+    left: 12%;
+  }
+  .raw{
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    border: 0.2rem solid rgb(76,217,100);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+  }
+  .ver{
+    width: 0.18rem;
+    height: 2rem;
+    background: rgb(76,217,100);
+  }
+  .poi{
+    width: 0.3rem;
+    height: 0.3rem;
+    border-radius: 50%;
+    margin-top: 0.7rem;
+    background: rgb(76,217,100);
+  }
+  .pop p{
+    font-size: 1.2rem;
+  }
+  .confrim{
+    background: rgb(76,217,100);
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    color: white;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-family: "Microsoft YaHei";
+    font-weight: 700;
+    border-radius: 0 0 0.6rem 0.6rem;
+  }
+  .cty{
+    font-size: 0.8rem;
+    color: #333;
+    line-height: 1.2rem;
+    text-align: center;
+    margin-top: .8rem;
+    padding: 0 .4rem;
+  }
+  .to_forget{
+    float: right;
+    font-size: .8rem;
+    color: #3b95e9;
+    margin-right: .3rem;
+    margin-top: 0.7rem;
   }
 </style>

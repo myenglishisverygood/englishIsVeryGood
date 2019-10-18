@@ -6,10 +6,10 @@
     </div>
     <div id="link" @click="login">
       <div class="img_tx">
-        <a href="" class="tx"><img src="./img/tx.jpeg" height="60rem" width="60rem"/></a>
+        <a href="" class="tx"><img src="./img/tx.jpeg"/></a>
       </div>
       <div class="cen">
-        <router-link :to="{}" class="login">登录/注册</router-link>
+        <router-link :to="{}" class="login">{{usernameAll}}</router-link>
         <p class="p1">
           <span class="glyphicon glyphicon-phone phone"></span>
           <span class="num">暂无绑定手机号</span>
@@ -27,12 +27,12 @@
           <span class="info-data-bottom">我的余额</span>
         </router-link>
         <router-link :to="{path:'/redpacket'}" class="info-data-link">
-            <span class="info-data-top">
-              <b>0</b>个</span>
+            <span class="info-data-top cent">
+              <b>3</b>个</span>
           <span class="info-data-bottom">我的优惠</span>
         </router-link>
         <router-link :to="{path:'/integration'}" class="info-data-link">
-            <span class="info-data-top">
+            <span class="info-data-top bott">
               <b>0</b>个</span>
           <span class="info-data-bottom">我的积分</span>
         </router-link>
@@ -88,14 +88,30 @@
     components: {Foots},
     data(){
       return {
-        StoreImage:[]
+        StoreImage:[],
+        usernameAll:"登录/注册",
+        ress:""
       }
+
     },
     methods:{
       login(){
-        this.$router.push({path:'/login'})
-      }
-    }
+          this.$router.push({path:'/login'})
+        }
+
+    },
+created(){
+      this.axios.get("https://elm.cangdu.org/v1/user").then((res)=>{
+        console.log(res);
+        this.usernameAll
+        if (res.data.username != "") {
+          this.usernameAll = res.data.username;
+          this.ress=res.data.username;
+        } else {
+          this.usernameAll = "登录/注册";
+        }
+      })
+}
 
   }
 </script>
@@ -116,7 +132,7 @@
     height:3rem;
     background:rgb(49,144,233);
     text-align: center;
-    overflow: hidden;
+    /*overflow: hidden;*/
   }
   .me{
     font-size: 1.3rem;
@@ -136,21 +152,27 @@
   #link{
     height: 5rem;
     background-color:#3190e8;
-    overflow: hidden;
+    /*overflow: hidden;*/
+    height: 5rem;
   }
   .img_tx{
     float: left;
     margin-left: 2rem;
+    width: 15%;
+
   }
   .tx img{
     border-radius: 50%;
     margin-top: 0.5rem;
+    width: 3rem;
+    height: 3rem;
   }
   .login{
     color: white;
     font-size: 1.2rem;
     font-weight: 800;
     font-family: "Helvetica Neue";
+    width: 85%;
 
 
 
@@ -178,15 +200,16 @@
     float: left;
     margin-top: 0.5rem;
     margin-left: 0.5rem;
+    /*width: 30rem;*/
 
   }
 
 .info-data{
   width: 100%;
-  height: 10%;
+  height: 5rem;
   background-color:white;
-  box-sizing: border-box;
-  overflow: hidden;
+  /*box-sizing: border-box;*/
+  /*overflow: hidden;*/
 
 }
 .clear{
@@ -195,7 +218,8 @@
    .info-data-link{
   float: left;
   width: 33%;
-  display: inline-block;
+   height: 5rem;
+  display: block;
   border-right: 1px solid #f1f1f1;
 
 }
@@ -230,12 +254,13 @@
    .profile{
      margin-top: .4rem;
      background: white;
-     /*height: 30%;*/
+
    }
   .myorder{
     padding-left: 1.6rem;
     display: flex;
     align-items: center;
+    /*height: 3rem;*/
   }
 
   .myorder-div{
@@ -260,5 +285,11 @@
 }
   .empty{
     clear: both;
+  }
+  .cent b{
+    color: #ff5f3e;
+  }
+  .bott b{
+    color: #6ac20b;
   }
 </style>

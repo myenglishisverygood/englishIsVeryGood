@@ -18,9 +18,10 @@ import Search from '../mpMain/Search'
 import Dingdan from '../mpMain/Dingdan'
 //余额
 import Balance from "../myenglish/balance"
+
 //积分商城
 import Integral from "../center/Shop"
-//优惠
+//我的优惠
 import RedPacket from "../center/RedPacket"
 //兑换红包
 import Exchange from '../myenglish/Redenvelopes'
@@ -34,6 +35,17 @@ import Server from '../center/Service'
 import Context from '../center/Context'
 // 登录
 import  Login from '../center/Login'
+//代金券说明
+import Chit from '../center/Chit'
+//历史红包
+import HistroyRed from '../center/HistoryRed'
+//红包说明
+import RedEv from '../center/RedEnvelopes'
+//推荐有礼
+import Prize from '../center/Prize'
+
+//重置密码
+import Repassword from '../myenglish/Repassword'
 Vue.use(Router)
 
 export default new Router({
@@ -46,6 +58,7 @@ export default new Router({
     {path:"/shopclass",component:Shopclass,name:'x'},
     {path:"/download",component:Download},
     {path:"/balance",component:Balance},
+
     {path:'/integral',component:Integral},
     {path:'/redpacket',component:RedPacket},
     {path:'/exchange',component:Exchange},
@@ -56,6 +69,14 @@ export default new Router({
     {path:'/search',component:Search},
     {path:'/server',component:Server},
     {path:'/context',component:Context,name:"context"},
-    {path:'/login',component:Login}
+    {path:'/login',component:Login},
+    {path:'/djq',component:Chit,name:'s'},
+    {path:'/hist',component:HistroyRed},
+    {path:'/es',component:RedEv,name:'r'},
+    {path:'/prize',component:Prize},
+    {path:'/repassword',component:Repassword}
+
+
+
   ]
 })
