@@ -94,7 +94,9 @@
             console.log("点击进入商品筛选页!");
           },
           xiang(id,index){
-            localStorage.setItem("detailId",JSON.stringify([id,index+1]))
+            localStorage.setItem("detailId",JSON.stringify(id));
+            localStorage.setItem("shopId",JSON.stringify(index+1))
+            this.$router.push({path:'/storedetail'})
           }
         },
         //设置轮播图--swiper
@@ -137,10 +139,6 @@
               limit:50
             }
             }).then((res)=>{
-
-            console.log(res.data[1]);
-
-            console.log(res.data);
             this.arrshop=res.data;
           }).catch((err)=>{
             console.log(err);

@@ -55,6 +55,10 @@ import Pushadd from '../center/NewAddress'
 //兑换会员
 import ExchangeVip from '../myenglish/ExchangeVip'
 
+// 店铺详情
+import StoreDetail from '../mpMain/Details'
+// 修改用户名
+import Changeusername from '../myenglish/ChangeUsername'
 import Shou from '../mpMain/shou'
 Vue.use(Router)
 
@@ -91,6 +95,8 @@ export default new Router({
     {path:'/vipcenter',component:VipCenter},
     {path:'/getaddress',component:GetAddress},
     {path:'/pushadd',component:Pushadd},
-    {path:'/exvip',component:ExchangeVip}
+    {path:'/exvip',component:ExchangeVip},
+    {path:'/storedetail',component:StoreDetail},
+    {path:'/changeusername',component:Changeusername}
   ]
 })

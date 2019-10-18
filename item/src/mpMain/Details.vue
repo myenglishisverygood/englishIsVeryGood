@@ -55,7 +55,7 @@
         },
         methods:{
           fan(){
-            console.log("触发返回事件!");
+            this.$router.go(-1)
           },
           onClick(name, title) {
             console.log(name,title);
@@ -66,12 +66,10 @@
 
         },
         mounted(){
+          this.ids = JSON.parse(localStorage.getItem("detailId"));
           this.axios.get("https://elm.cangdu.org/shopping/restaurant/"+this.ids).then((result)=>{
-            console.log("12",result.data);
             this.arr=result.data;
             this.imgs = this.arr.image_path;
-            console.log(this.imgs);
-            console.log(this.arr);
           }).catch((err)=>{
             console.log(err);
           });

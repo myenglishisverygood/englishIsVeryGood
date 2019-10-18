@@ -187,6 +187,7 @@
 
     //@@创建后请求数据
     created() {
+      this.idr = JSON.parse(localStorage.getItem("shopId"))
       //左侧导航栏列表请求
       this.axios.get("https://elm.cangdu.org/shopping/v2/menu?restaurant_id="+this.idr).then((result) => {
         // console.log(result.data);

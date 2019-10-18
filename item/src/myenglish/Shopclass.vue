@@ -137,8 +137,9 @@
         this.$router.push({path: '/home'})
       },
       xiang(id) {
-        console.log(id)
-        localStorage.setItem("shaixuan",JSON.stringify(id));
+        localStorage.setItem("detailId",JSON.stringify(id));
+        localStorage.setItem("shopId",JSON.stringify(id))
+        this.$router.push({path:'/storedetail'})
       },
       numpush() {
         this.num++;
