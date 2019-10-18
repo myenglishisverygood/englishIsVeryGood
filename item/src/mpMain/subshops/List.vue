@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span>{{ben}}</span><span>{{qu}}</span>
+    <span>{{ben}}</span>
     <div class="Lmark">
       <!--左侧导航栏-->
       <div class="L-left">

@@ -22,7 +22,7 @@
               </li>
             </ul>
             <div class="bot">
-              <div class="empty">清空</div>
+              <div class="empty" @click="empty">清空</div>
               <div class="confirm">确定<span :class="{numDiv:numDiv}">({{num}})</span></div>
             </div>
           </van-dropdown-item>
@@ -133,6 +133,9 @@
       })
     },
     methods: {
+      empty(){
+        this.num = 0
+      },
       leave() {
         this.$router.push({path: '/home'})
       },
