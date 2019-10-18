@@ -73,6 +73,7 @@ export default new Router({
         {path:"/home/dingdan",component:Dingdan},
         {path:"/home/center",component:Center}
       ]},
+    {path:'/center',component:Center},
     {path:"/shopclass",component:Shopclass,name:'x'},
     {path:"/download",component:Download},
     {path:"/balance",component:Balance},
