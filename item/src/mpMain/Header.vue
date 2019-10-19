@@ -19,10 +19,7 @@
           }
         },
         created(){
-           this.wz1 = this.$route.query.geo
-            this.axios.get("https://elm.cangdu.org/v2/pois/" + this.wz1).then((res)=>{
-              this.title = res.data.name
-            })
+          this.title = JSON.parse(localStorage.getItem('hometitle')).name;
         },
         methods:{
           // 搜索点击

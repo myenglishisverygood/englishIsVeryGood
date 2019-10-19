@@ -14,12 +14,10 @@
     <div class="seachHis" v-if="seachhis">搜索历史</div>
     <div>
       <div v-if="searchlist">
-        <router-link v-for="(v,i) in minute" :key="i" class="list"
-                     :to="{name:'j',query:{geo:v.geohash,lon:v.longitude,lat:v.latitude}}"
-                     @click.native="savehistory(v,v.name)">
+        <div v-for="(v,i) in minute" :key="i" class="list" @click="savehistory(v,v.name)">
           <div class="listName">{{v.name}}</div>
           <div class="listAddress">{{v.address}}</div>
-        </router-link>
+        </div>
       </div>
       <div v-if="historyrecord">
         <router-link v-for="(s,b) in history" :key="b" class="list"
@@ -73,6 +71,7 @@
         })
       },
       savehistory(a, b) {
+        // 历史记录存储
         if (this.inputInfo != "") {
           // 表示localStorage没有placeHistory字段
           if (!localStorage.getItem("placeHistory")) {
@@ -83,7 +82,13 @@
           }
           localStorage.setItem("placeHistory", JSON.stringify(this.his))
         }
+        // 首页地址栏
+        localStorage.setItem("hometitle",JSON.stringify(a))
+        this.$router.push({path:'/home/h'})
       },
+
+
+
       clearHistory() {
         this.his = [];
         this.history = [];
