@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="head-top">
       历史记录
-      <router-link :to="{}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
+      <router-link :to="{path:'/redpacket'}"><span class="glyphicon glyphicon-menu-left lia"></span></router-link>
     </div>
     <div class="scroll">
         <ul>
@@ -48,7 +48,8 @@
 
       })
 
-    }
+    },
+
   }
 
 </script>
@@ -86,6 +87,11 @@
     line-height: 2.55rem;
     color: white;
     font-family: "Microsoft YaHei";
+  }
+  .lia{
+    width: 2rem;
+    height: 2rem;
+    z-index: 2000;
   }
   .glyphicon{
     position: absolute;

@@ -2,7 +2,7 @@
     <div class="wrap">
       <div class="head-top">
        {{gettitle}}
-        <router-link :to="{path:'/fg'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
+        <router-link :to="{path:'/redpacket'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
       </div>
       <div class="context">{{getcon}}
         <div  v-for="(x,y) in envelope" class="text">

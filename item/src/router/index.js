@@ -74,6 +74,10 @@ import Business from '../center/Business'
 import Auth from '../center/FoodSupervision'
 //倒计时
 import SetTim from '../center/OnlinPayment'
+//推荐有礼
+import TuiJian from '../center/Prize'
+//历史红包
+import LishiRed from '../center/HistoryRed'
 Vue.use(Router)
 
 export default new Router({
@@ -119,6 +123,8 @@ export default new Router({
     {path:'/beizhu',component:BeiZhu},
     {path:'/business',component:Business},
     {path:'/auth',component:Auth},
-    {path:'/onlin',component:SetTim}
+    {path:'/onlin',component:SetTim},
+    {path:'/tuijian',component:TuiJian},
+    {path:'/lishired',component:LishiRed}
   ]
 })

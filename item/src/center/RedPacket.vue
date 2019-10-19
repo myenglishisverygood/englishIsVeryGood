@@ -40,14 +40,14 @@
             <p>限品种:快餐便当、特色菜系、小吃夜宵、甜品饮品、异国料理</p>
           </footer>
         </ul>
-        <router-link :to="{}" class="history_hongbao">
+        <router-link :to="{path:'/lishired'}" class="history_hongbao">
           <span class="check_history">查看历史红包</span>
           <span> ></span>
         </router-link>
       </div>
       <footer class="hongbao_footer">
         <router-link :to="{path:'/exchange'}" class="hongbao_style">兑换红包</router-link>
-        <router-link :to="{}" class="hongbao_style">推荐有礼</router-link>
+        <router-link :to="{path:'/tuijian'}" class="hongbao_style">推荐有礼</router-link>
       </footer>
     </div>
 
