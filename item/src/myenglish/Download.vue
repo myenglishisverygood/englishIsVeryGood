@@ -1,7 +1,7 @@
 <template>
   <div class="download">
     <div class="title">
-      <router-link :to="{path:'/home/center'}">
+      <router-link :to="{}" @click.native="ret">
         <img src="./img/箭头.png" alt="" class="arrows">
       </router-link>
       <span>下载</span>
@@ -36,6 +36,11 @@
     data() {
       return {
         down: false
+      }
+    },
+    methods:{
+      ret(){
+        this.$router.go(-1)
       }
     }
   }
