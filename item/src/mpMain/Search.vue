@@ -171,6 +171,29 @@
     height: 3rem;
   }
 
+  #mark{
+    animation: fae .5s;
+    -webkit-animation:fae .5s;
+    animation-fill-mode: forwards
+  }
+  @keyframes  fae{
+    0%{
+      opacity: 0;
+    }
+    25%{
+      opacity: 0.2;
+    }
+    50%{
+      opacity: 0.5;
+    }
+    75%{
+      opacity: 0.75;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+
   .suo {
     line-height: 3.2rem;
     margin-left: 1rem;

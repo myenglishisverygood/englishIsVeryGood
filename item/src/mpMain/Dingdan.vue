@@ -31,6 +31,29 @@
 
 <style scoped>
   @import "//at.alicdn.com/t/font_1452025_1ydiz1mtqmxi.css";
+  #Dmark{
+    animation: fae .5s;
+    -webkit-animation:fae .5s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes  fae{
+    0%{
+      opacity: 0;
+    }
+    25%{
+      opacity: 0.2;
+    }
+    50%{
+      opacity: 0.5;
+    }
+    75%{
+      opacity: 0.75;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+
   .a{
     background: rgb(49,144,232);
     height: 3rem;

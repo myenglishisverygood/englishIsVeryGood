@@ -2,7 +2,7 @@
     <div class="wrap">
       <div class="head-top">
         在线支付
-        <router-link :to="{path:'/center'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
+        <router-link :to="{}" @click.native="ret"><span class="glyphicon glyphicon-menu-left"></span></router-link>
       </div>
       <div class="show_time">
         <div>
@@ -61,6 +61,9 @@
             this.p = true;
           }
         },
+        ret(){
+          this.$router.go(-1)
+        },
         yin() {
           if (this.p == true) {
             this.p = false;
@@ -84,6 +87,29 @@
 </script>
 
 <style scoped>
+  .wrap{
+    animation: fae .5s;
+    -webkit-animation:fae .5s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes  fae{
+    0%{
+      opacity: 0;
+    }
+    25%{
+      opacity: 0.2;
+    }
+    50%{
+      opacity: 0.5;
+    }
+    75%{
+      opacity: 0.75;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+
   .head-top{
     width: 100%;
     height: 2.9rem;

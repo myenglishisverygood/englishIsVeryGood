@@ -31,7 +31,11 @@
           },
           //登录点击
           login(){
-            console.log("点击登录!");
+            if (localStorage.getItem("user_id")){
+              this.$router.push({path:'/home/center'})
+            } else {
+              this.$router.push({path:'/login'})
+            }
           },
           ret(){
             this.$router.push({path:"/changecity"})

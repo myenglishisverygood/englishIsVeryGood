@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <div class="bm">
       <router-link :to="{path:'/getaddress'}">
         <i class="iconfont icon-zuojian" style="line-height: 2.5rem; font-size: 1rem;color: white"></i>
@@ -160,6 +160,29 @@
 
 <style scoped>
   @import "//at.alicdn.com/t/font_1453346_v5w9ntjvvt.css";
+  .wrap{
+    animation: fae .5s;
+    -webkit-animation:fae .5s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes  fae{
+    0%{
+      opacity: 0;
+    }
+    25%{
+      opacity: 0.2;
+    }
+    50%{
+      opacity: 0.5;
+    }
+    75%{
+      opacity: 0.75;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+
   .inn{
     margin-top: 0.3rem;
   }

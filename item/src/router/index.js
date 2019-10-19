@@ -62,6 +62,18 @@ import Changeusername from '../myenglish/ChangeUsername'
 import Shou from '../mpMain/shou'
 //地址搜索
 import SuoS from '../center/SuoS'
+// 确认订单
+import Queren from '../mpMain/qurendingdan'
+// 确认订单选择地址
+import AddAddress from '../myenglish/AddAddress'
+//备注
+import BeiZhu from '../mpMain/subshops/dingdanbiezhu'
+//店铺详情
+import Business from '../center/Business'
+//企业认证详情
+import Auth from '../center/FoodSupervision'
+//倒计时
+import SetTim from '../center/OnlinPayment'
 Vue.use(Router)
 
 export default new Router({
@@ -101,6 +113,12 @@ export default new Router({
     {path:'/exvip',component:ExchangeVip},
     {path:'/storedetail',component:StoreDetail},
     {path:'/changeusername',component:Changeusername},
-    {path:'/bSou',component:SuoS}
+    {path:'/bSou',component:SuoS},
+    {path:'/confirmshop',component:Queren},
+    {path:'/addaddress',component:AddAddress},
+    {path:'/beizhu',component:BeiZhu},
+    {path:'/business',component:Business},
+    {path:'/auth',component:Auth},
+    {path:'/onlin',component:SetTim}
   ]
 })

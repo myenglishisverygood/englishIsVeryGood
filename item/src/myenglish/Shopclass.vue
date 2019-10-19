@@ -10,7 +10,11 @@
           <van-dropdown-item :title="title">
             <van-tree-select :items="items" :active-id.sync="activeId" :main-active-index.sync="activeIndex"/>
           </van-dropdown-item>
-          <van-dropdown-item v-model="value2" :options="option2"/>
+          <van-dropdown-item v-model="value2" :options="option2">
+            <ul class="sort">
+              <li v-for="(l,p) in sortArr" :key="p" @click="sortStore(l)">{{l}}</li>
+            </ul>
+          </van-dropdown-item>
           <van-dropdown-item title="筛选">
             <div class="method">配送方式</div>
             <div class="hummingbird"><img src="./img/蜂鸟.png"/>蜂鸟专送</div>
@@ -81,12 +85,6 @@
         ],
         option2: [
           {text: '排序', value: 'a'},
-          {text: '智能排序'},
-          {text: '距离最近'},
-          {text: '销量最高'},
-          {text: '起送价最低'},
-          {text: '配送速度最快'},
-          {text: '评分最高'}
         ],
         items: [],
         items_info: [],
@@ -94,7 +92,8 @@
         activeIndex: 0,
         proArr: [],
         num: "0",
-        numDiv: true
+        numDiv: true,
+        sortArr:["智能排序","距离最近","销量最高","起送价最低","配送速度最快","评分最高"],
       }
     },
     components: {
@@ -137,7 +136,6 @@
         this.num = 0
       },
       leave() {
-        // this.$router.push({path: '/home'})
         this.$router.go(-1)
       },
       xiang(id) {
@@ -148,6 +146,9 @@
       numpush() {
         this.num++;
         this.numDiv = false;
+      },
+      sortStore(sortName){
+        console.log(sortName)
       }
     }
   }
@@ -157,8 +158,28 @@
   .shopClass {
     width: 100%;
     height: 100%;
+    animation: fae .5s;
+    -webkit-animation:fae .5s;
+    animation-fill-mode: forwards;
   }
 
+  @keyframes  fae{
+    0%{
+      opacity: 0;
+    }
+    25%{
+      opacity: 0.2;
+    }
+    50%{
+      opacity: 0.5;
+    }
+    75%{
+      opacity: 0.75;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
   .header {
     width: 100%;
     background: rgb(49, 144, 232);
@@ -173,7 +194,6 @@
     left: 0;
     z-index: 1;
   }
-
   .header > img {
     height: 1.6rem;
     width: 1.8rem;
@@ -395,5 +415,14 @@
 
   .numDiv {
     display: none;
+  }
+  .sort{
+    color: #666666;
+    text-align: left;
+    font-size: .5rem;
+    padding-left: 1rem;
+  }
+  .sort li {
+    border-bottom: 1px solid #e4e4e4;
   }
 </style>

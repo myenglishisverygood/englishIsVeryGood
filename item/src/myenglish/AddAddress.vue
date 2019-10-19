@@ -170,6 +170,9 @@
   .title_y{
     padding: 3rem 0;
     padding-bottom: 3rem;
+    animation: fae .7s;
+    -webkit-animation:fae .7s;
+    animation-fill-mode: forwards;
   }
   .titles_y{
     position: fixed;
@@ -180,9 +183,6 @@
     background: rgba(0,0,0,0.05);
     z-index: 202;
     padding-top: 3rem;
-    animation: fae .7s;
-    -webkit-animation:fae .7s;
-    animation-fill-mode: forwards;
   }
   @keyframes  fae{
     0%{

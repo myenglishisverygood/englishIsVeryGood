@@ -100,6 +100,26 @@
       width: 100%;
       height: 100%;
       background:rgb(241,241,241);
+      animation: fae .5s;
+      -webkit-animation:fae .5s;
+      animation-fill-mode: forwards;
+    }
+    @keyframes  fae{
+      0%{
+        opacity: 0;
+      }
+      25%{
+        opacity: 0.2;
+      }
+      50%{
+        opacity: 0.5;
+      }
+      75%{
+        opacity: 0.75;
+      }
+      100%{
+        opacity: 1;
+      }
     }
     .title {
       width: 100%;

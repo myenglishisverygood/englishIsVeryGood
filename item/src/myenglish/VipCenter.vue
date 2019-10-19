@@ -42,7 +42,7 @@
             <span>1个月</span>
             <span>￥20</span>
           </div>
-          <div class="buy">购买</div>
+          <div class="buy" @click="buyvip">购买</div>
         </div>
       </div>
 
@@ -86,6 +86,11 @@
         leave(){
           this.$router.push({path:'/home/center'})
         },
+        buyvip(){
+          if (localStorage.getItem("user_id")){
+            this.$router.push({path:'/onlin'})
+          }
+        }
       },
       created(){
         this.axios.get("https://elm.cangdu.org/v1/user").then((res)=>{
@@ -100,7 +105,28 @@
     width: 100%;
     height: 100%;
     background: #f5f5f5;
+    animation: fae .5s;
+    -webkit-animation:fae .5s;
+    animation-fill-mode: forwards;
   }
+  @keyframes  fae{
+    0%{
+      opacity: 0;
+    }
+    25%{
+      opacity: 0.2;
+    }
+    50%{
+      opacity: 0.5;
+    }
+    75%{
+      opacity: 0.75;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+
   .title{
     width: 100%;
     background: rgb(49,144,232);

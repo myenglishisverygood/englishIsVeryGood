@@ -2,7 +2,7 @@
   <ul>
     <!--订单备注顶部-->
     <li class="top">
-      <router-link class="back" :to="{}"><i class="icon-Group- iconfont"></i></router-link>
+      <router-link class="back" :to="{path:'/confirmshop'}"><i class="icon-Group- iconfont"></i></router-link>
       <p class="top-wz">订单备注</p>
     </li>
     <!--快速备注-->
@@ -96,7 +96,8 @@
           sendM(){
             let arr = [this.isla[this.isla.length-1],this.c1,this.c2,this.c3,this.c4,this.isbing[this.isbing.length-1],this.texts];
             let str = arr.join(' ');
-            console.log(str);
+            localStorage.setItem("beizhu",JSON.stringify(str));
+            this.$router.push({path:'/confirmshop'})
           }
         }
 

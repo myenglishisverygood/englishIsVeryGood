@@ -1,16 +1,16 @@
 <template>
-  <ul>
+  <ul id="mark">
     <!--订单顶部-->
     <li class="otop">
-      <router-link class="back" :to="{path:''}"><i class="icon-Group- iconfont otopi"></i></router-link>
+      <router-link class="back" :to="{path:'/storedetail'}" @click.native="ret""><i class="icon-Group- iconfont otopi"></i></router-link>
       <p class="otop-wz">确认订单</p>
     </li>
     <!--添加地址-->
-    <li class="address">
+    <li class="address" @click="changeaddress">
       <div>
         <i class="icon-ditu1 iconfont"></i>
         <span class="addiwz">请添加一个收货地址</span>
-        <router-link :to="{path:''}"><i class="icon-icon-- iconfont"></i></router-link>
+        <router-link :to="{}"><i class="icon-icon-- iconfont"></i></router-link>
       </div>
     </li>
     <!--送达时间-->
@@ -49,6 +49,7 @@
       <div class="sbt">
         <img :src="'//elm.cangdu.org/img/' + shopo.image_path" alt="">
         <p class="sbt-wz">{{shopo.name}}</p>
+        <p class="sbt-wz" v-for="(v,i) in stupid" :key="i"><span class="sbt-wzs">{{v.name}}</span><span class="sbt-wz1">{{v.count}}</span><span class="sbt-wz2">￥{{v.price}}{{js}}</span></p>
       </div>
       <div class="pros">
         <div>
@@ -64,13 +65,13 @@
         <div>
           <span>订单￥10</span>
           <span>待支付</span>
-          <div>￥10</div>
+          <div>￥{{jss}}</div>
         </div>
       </div>
     </li>
     <!--订单备注-->
     <li class="remarks">
-      <router-link :to="{path:''}">
+      <router-link :to="{path:'/beizhu'}">
         <span>订单备注</span>
         <span>{{remark}}</span>
       </router-link>
@@ -81,8 +82,8 @@
     </li>
     <!--支付money-->
     <li class="footer">
-      <span>待支付 ￥10</span>
-      <router-link :to="{path:''}">确认下单</router-link>
+      <span>待支付 ￥{{jss}}</span>
+      <router-link :to="{path:'/onlin'}">确认下单</router-link>
     </li>
   </ul>
 </template>
@@ -99,22 +100,46 @@
           f:'animated slideOutDown .5s linear',
           latitude:'',
           longitude:'',
-          remark:'口味、偏好等 >'
+          remark:'口味、偏好等 >',
+          stupid:[],
+          jss:0,
+          beizhu:[],
         }
       },
       created(){
-
+        this.id = JSON.parse(localStorage.getItem("detailId"));
+        this.stupid = JSON.parse(localStorage.getItem("h1"));
+        this.beizhu = JSON.parse(localStorage.getItem("beizhu"))
+        console.log(this.stupid)
         this.axios.get('https://elm.cangdu.org/shopping/restaurant/'+this.id).then((result)=>{
           this.shopo = result.data;
-          // console.log(this.id);
-          console.log(this.shopo);
         });
+        console.log(this.beizhu)
       },
       updated(){
-        if(true){
+        if(this.beizhu.length == 0){
           this.remark = '口味、偏好等 >'
-        }else {
+        }else{
           //   获取订单备注中的内容
+          this.remark  = this.beizhu
+        }
+      },
+      methods:{
+        changeaddress(){
+          this.$router.push({path:'/addaddress'})
+        }
+      },
+      computed:{
+          js(){
+            let a = 10;
+               for (let v of this.stupid){
+                 // console.log(v.count*v.price);
+                 a+=(v.count*v.price);
+                  this.jss = a;
+               }
+          },
+        ret(){
+            window.localStorage.removeItem("beizhu")
         }
       }
     };
@@ -153,8 +178,30 @@
     width: 100%;
     height: 100%;
     font-size: 16px;
-
   }
+  #mark{
+    animation: fae .5s;
+    -webkit-animation:fae .5s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes  fae{
+    0%{
+      opacity: 0;
+    }
+    25%{
+      opacity: 0.2;
+    }
+    50%{
+      opacity: 0.5;
+    }
+    75%{
+      opacity: 0.75;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+
   .otop{
     background: #3190e8;
     color: white;
@@ -336,6 +383,22 @@
     position: relative;
     padding-bottom: .5rem;
     border-bottom: 0.05rem solid rgba(0,0,0,0.1);
+  }
+  .sbt-wzs{
+    display: inline-block;
+    width: 8rem;
+    overflow: hidden;
+    white-space: nowrap;/*不换行*/
+    text-overflow:ellipsis;/*超出部分文字以...显示*/
+  }
+  .sbt-wz1{
+    margin-left: 5rem;
+    font-size: 0.8rem;
+  }
+  .sbt-wz2{
+    color: orangered;
+    margin-left: 3rem;
+    font-size: 1rem;
   }
   .sum img{
     width: 3rem;

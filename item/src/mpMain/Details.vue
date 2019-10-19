@@ -55,13 +55,13 @@
         },
         methods:{
           fan(){
-            this.$router.go(-1)
+            this.$router.push({path:'/home'})
           },
           onClick(name, title) {
             console.log(name,title);
           },
           huo(){
-            console.log("触发进入活动详情页!");
+            this.$router.push({path:'/business'})
           },
 
         },
@@ -87,7 +87,27 @@
   position: fixed;
   top: 0;
   left: 0;
+  animation: fae .5s;
+  -webkit-animation:fae .5s;
+  animation-fill-mode: forwards;
 }
+  @keyframes  fae{
+    0%{
+      opacity: 0;
+    }
+    25%{
+      opacity: 0.2;
+    }
+    50%{
+      opacity: 0.5;
+    }
+    75%{
+      opacity: 0.75;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
   .fox{
     height: 6rem;
     display: flex;

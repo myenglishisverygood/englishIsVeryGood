@@ -66,6 +66,28 @@
 <style scoped>
   @import "//at.alicdn.com/t/font_1453346_v5w9ntjvvt.css";
   @import "//at.alicdn.com/t/font_1453346_y1nxc20b35h.css";
+  .app{
+    animation: fae .5s;
+    -webkit-animation:fae .5s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes  fae{
+    0%{
+      opacity: 0;
+    }
+    25%{
+      opacity: 0.2;
+    }
+    50%{
+      opacity: 0.5;
+    }
+    75%{
+      opacity: 0.75;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
   .bm{
     background-color: #3190e8;
     z-index: 100;
