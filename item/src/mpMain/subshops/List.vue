@@ -67,7 +67,7 @@
           <div class="sprice">配送费￥5</div>
         </div>
         <router-link class="sbtn" :to="{}"><span class="js" v-if="mo>=20">去结算</span></router-link>
-        <router-link class="sbtn1" :to="{}" v-if="mo<20"><span class="js">去结算</span></router-link>
+        <router-link class="sbtn1" :to="{}" v-if="mo<20"><span class="js">还差￥20元起送</span></router-link>
       </div>
     </div>
   </div>
