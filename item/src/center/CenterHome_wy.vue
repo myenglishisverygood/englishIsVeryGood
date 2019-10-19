@@ -39,7 +39,7 @@
       </ul>
     </div>
     <div class="profile">
-      <router-link :to="{path:'/dingdan'}" class="myorder">
+      <router-link :to="{path:'/home/dingdan'}" class="myorder">
         <i class="iconfont icon-chakantiezigengduo aa"></i>
         <div class="myorder-div">
           <span class="myorder-span">我的订单</span>

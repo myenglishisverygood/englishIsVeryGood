@@ -19,7 +19,7 @@
         <p class="pp" v-if="bb">送餐地址太短了，不能识别</p>
       </div>
       <div class="inpt">
-        <input type="text" :class="inpu3" placeholder="请填写能够联系到您的手机号" v-model="vv" @keydown="dian2">
+        <input type="text" :class="inpu3" placeholder="请填写能够联系到您的手机号" v-model="vv" @keydown="dian2" maxlength="11">
         <p class="pp" v-if="cc">{{shou}}</p>
       </div>
       <div class="inpt">

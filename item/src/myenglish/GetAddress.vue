@@ -32,7 +32,7 @@
         shu:[],
         state:"编辑",
         acc:true,
-        ss:true
+        ss:false
       }
     },
     methods:{

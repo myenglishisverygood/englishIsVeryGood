@@ -84,7 +84,7 @@
       },
       methods:{
         leave(){
-          this.$router.push({path:'/center'})
+          this.$router.push({path:'/home/center'})
         },
       },
       created(){

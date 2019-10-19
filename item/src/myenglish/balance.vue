@@ -39,7 +39,7 @@
         },
         methods:{
           returnCenter(){
-            this.$router.push({path:'center'})
+            this.$router.push({path:'/homge/center'})
           },
           explain(){
             console.log(1)

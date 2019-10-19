@@ -1,7 +1,7 @@
 <template>
   <div class="download">
     <div class="title">
-      <router-link :to="{path:'/center'}">
+      <router-link :to="{path:'/home/center'}">
         <img src="./img/箭头.png" alt="" class="arrows">
       </router-link>
       <span>下载</span>

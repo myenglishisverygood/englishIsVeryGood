@@ -2,7 +2,7 @@
     <div class="wrap">
       <div class="head-top">
         我的积分
-        <router-link :to="{path:'/center'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
+        <router-link :to="{path:'/home/center'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
       </div>
       <div class="container">
         <div class="content">

@@ -96,10 +96,10 @@
                 this.user_id = JSON.parse(localStorage.getItem("user_id"));
                 this.user_id = res.data.user_id
               }
-              localStorage.setItem("user_id", JSON.stringify(this.user_id))
+              localStorage.setItem("user_id", JSON.stringify(this.user_id));
               this.$router.push({path: "/home/center"});
             }else {
-              this.hiddens = true
+              this.hiddens = true;
               this.altermes = res.data.message;
             }
           }, (err) => {

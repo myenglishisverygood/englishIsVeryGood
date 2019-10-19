@@ -137,7 +137,8 @@
         this.num = 0
       },
       leave() {
-        this.$router.push({path: '/home'})
+        // this.$router.push({path: '/home'})
+        this.$router.go(-1)
       },
       xiang(id) {
         localStorage.setItem("detailId",JSON.stringify(id));

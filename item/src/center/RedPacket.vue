@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="head-top">
       我的优惠
-      <router-link :to="{path:'/center'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
+      <router-link :to="{path:'/home/center'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
     </div>
     <div class="categroy_title">
       <span class="choose" v-for="(item,index) in itemList" :class="{ 'red-link':index === isActive }"  @click="getItem(item, index)">{{item}}</span>
