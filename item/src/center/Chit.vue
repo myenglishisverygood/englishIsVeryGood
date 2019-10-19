@@ -1,11 +1,9 @@
 <template>
   <div class="wrap">
-
     <div class="head-top">
       {{gettitle}}
       <router-link :to="{path:'/redpacket'}"><span class="glyphicon glyphicon-menu-left"></span></router-link>
     </div>
-
     <div class="context">{{getcon}}
       <div  v-for="(x,y) in con" class="text">
         <h4 class="title">{{x[0]}}</h4>
@@ -21,7 +19,7 @@
 
 <script>
   export default {
-    name: "Explain",
+    name: "Chit",
     data() {
       return{
         con:[],
