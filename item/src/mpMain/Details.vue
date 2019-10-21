@@ -55,7 +55,7 @@
         },
         methods:{
           fan(){
-            this.$router.push({path:'/home'})
+            this.$router.go(-1)
           },
           onClick(name, title) {
             console.log(name,title);

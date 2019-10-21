@@ -1,168 +1,313 @@
 <template>
-  <!-- 筛选商品 -->
-  <div class="shopClass">
+  <div class="sortshops">
     <div class="header">
-      <img src="./img/箭头.png" alt="" @click="leave">
-      <span>{{title}}</span>
-      <!--筛选列表-->
-      <div>
-        <van-dropdown-menu>
-          <van-dropdown-item :title="title">
-            <van-tree-select :items="items" :active-id.sync="activeId" :main-active-index.sync="activeIndex"/>
-          </van-dropdown-item>
-          <van-dropdown-item v-model="value2" :options="option2">
-            <ul class="sort">
-              <li v-for="(l,p) in sortArr" :key="p" @click="sortStore(l)">{{l}}</li>
-            </ul>
-          </van-dropdown-item>
-          <van-dropdown-item title="筛选">
-            <div class="method">配送方式</div>
-            <div class="hummingbird"><img src="./img/蜂鸟.png"/>蜂鸟专送</div>
-            <div class="propertyTitle">商家属性（可以多选）</div>
-            <ul style="overflow: hidden">
-              <li v-for="(con,k) in proArr" :key="k" class="context" @click="numpush">
-                <span>{{con.icon_name}}</span>
-                <span>{{con.name}}</span>
+      <router-link class="a1" :to="{path:'/home'}"><img src="./img/箭头.png" alt=""></router-link>
+      <p>{{lastInfo[0]}}</p>
+    </div>
+    <ul class="firstul">
+      <van-dropdown-menu :style="{width:'100%'}" active-color="#3190e8">
+        <van-dropdown-item :title=titleName @click="isplay=!isplay">
+          <div class="doubleUl">
+            <ul class="foodsul">
+              <li class="firstli">
+                <span>{{firstInfo[0].name}}</span>
+                <span class="span15">{{firstInfo[0].count}}</span>
+              </li>
+              <li v-for="(v,i) in shopsortInfo" :key="i" @click.native="changeColor(i+1)" :class="{colorCss:i+1}" @click="isqwert(v.sub_categories)">
+                <div @click.native="index=i">
+                  <div class="anextL">
+                    <img :src=v.image_url alt="">
+                    <span>{{v.name}}</span>
+                  </div>
+                  <div class="anextR">
+                    <span>{{v.count}}</span>  >
+                  </div>
+                </div>
               </li>
             </ul>
-            <div class="bot">
-              <div class="empty" @click="empty">清空</div>
-              <div class="confirm">确定<span :class="{numDiv:numDiv}">({{num}})</span></div>
+            <ul class="foodsulR">
+              <li v-for="(w,j) in qwertyui" :key="j" @click="huoqu(w.id)">
+                  <span>{{w.name}}</span>
+                  <span>{{w.count}}</span>
+              </li>
+            </ul>
+          </div>
+        </van-dropdown-item>
+        <van-dropdown-item title="排序">
+          <div class="pxas">
+            <li>
+              <i class='iconfont icon-renqipaixu' style="color:#9FC4E4"></i>
+              <p @click="getinfo(0)">智能排序</p>
+            </li>
+            <li>
+              <i class='iconfont icon-julizuijin' style="color:#44A7D8"></i>
+              <p @click="getinfo(5)">距离最近</p>
+            </li>
+            <li>
+              <i class='iconfont icon-hebingxingzhuang' style="color:#F17C7C"></i>
+              <p @click="getinfo(6)">销量最高</p>
+            </li>
+            <li>
+              <i class='iconfont icon-jg' style="color:#E6B61A"></i>
+              <p @click="getinfo(1)">起送价最低</p>
+            </li>
+            <li>
+              <i class='iconfont icon-shijian' style="color:#37C7B7"></i>
+              <p @click="getinfo(2)">配送速度最快</p>
+            </li>
+            <li>
+              <i class='iconfont icon-pingfen' style="color:#F0BD6F"></i>
+              <p @click="getinfo(3)">评分最高</p>
+            </li>
+          </div>
+        </van-dropdown-item>
+        <van-dropdown-item title="筛选">
+          <div class="sxas">
+            <p>配送方式</p>
+            <ul>
+              <li @click="ischange(0)">
+                <i class='iconfont icon-fengniao' style="color: #3190e8" v-if="changeArr1[0]"></i>
+                <span class="span26" v-else="changeArr1[0]">√</span>
+                <p :style="{'color':changeArr1[0] ? '#333' : '#3190e8'}">蜂鸟专送</p>
+              </li>
+            </ul>
+            <p>商家属性(可以多选)</p>
+            <ul>
+              <li @click="ischange(1)">
+                <span class="span20" v-if="changeArr1[1]">品</span>
+                <span class="span26" v-else="changeArr1[1]">√</span>
+                <p :style="{'color':changeArr1[1] ? '#333' : '#3190e8'}">品牌商家</p>
+              </li>
+              <li @click="ischange(2)">
+                <span class="span21" v-if="changeArr1[2]">保</span>
+                <span class="span26" v-else="changeArr1[2]">√</span>
+                <p :style="{'color':changeArr1[2] ? '#333' : '#3190e8'}">外卖保</p>
+              </li>
+              <li @click="ischange(3)">
+                <span class="span22" v-if="changeArr1[3]">准</span>
+                <span class="span26" v-else="changeArr1[3]">√</span>
+                <p :style="{'color':changeArr1[3] ? '#333' : '#3190e8'}">准时达</p>
+              </li>
+              <li @click="ischange(4)">
+                <span class="span23" v-if="changeArr1[4]">新</span>
+                <span class="span26" v-else="changeArr1[4]">√</span>
+                <p :style="{'color':changeArr1[4] ? '#333' : '#3190e8'}">新店</p>
+              </li>
+              <li @click="ischange(5)">
+                <span class="span24" v-if="changeArr1[5]">付</span>
+                <span class="span26" v-else="changeArr1[5]">√</span>
+                <p :style="{'color':changeArr1[5] ? '#333' : '#3190e8'}">在线支付</p>
+              </li>
+              <li @click="ischange(6)">
+                <span class="span25" v-if="changeArr1[6]">票</span>
+                <span class="span26" v-else="changeArr1[6]">√</span>
+                <p :style="{'color':changeArr1[6] ? '#333' : '#3190e8'}">开发票</p>
+              </li>
+            </ul>
+            <div class="sxasbottom">
+              <button class="button1" @click="deleteAll">清空</button>
+              <button class="button2" @click="diffsearch">确认{{funnumber()}}</button>
             </div>
-          </van-dropdown-item>
-        </van-dropdown-menu>
-      </div>
-    </div>
-    <!--列表-->
-    <div class="shopList">
+          </div>
+        </van-dropdown-item>
+      </van-dropdown-menu>
+    </ul>
+
+
+
+    <div class="foods">
       <ul>
-        <li class="shop-n" v-for="(v,i) in arrshop" :key="i" @click="xiang(v.id)">
-          <div class="shop-z">
-            <img :src="B+v.image_path" alt="" style="width: 5rem;height: 5rem;margin-left: 0.5rem">
-          </div>
-          <div class="shop-y">
-            <div class="y-one">
-              <h4 class="y-wz1">{{v.name}}</h4>
+        <li v-for="(p,i) in shopListInfo" :key="i" @click="gotodetail(p.id)">
+          <router-link class="a5" :to="{}">
+            <img :src=imgUrl+p.image_path alt="">
+            <div class="rights">
+              <div class="up">
+                <div class="upleft">
+                  <span class="pp">品牌</span>
+                  <span class="ppname">{{p.name}}</span>
+                </div>
+                <div class="upright" >
+                  <span>{{p.supports[0].icon_name}}</span>
+                  <span>{{p.supports[1].icon_name}}</span>
+                  <span>票</span>
+                </div>
+              </div>
+              <div class="center">
+                <van-rate v-model="p.rating" size="0.5rem" gutter="0.05rem" allow-half  readonly/><span>{{p.rating}}</span><span>月售{{p.recent_order_num}}单</span>
+                <div class="centerRight">
+                  <span class="fnzs">{{p.delivery_mode.text}}</span>
+                  <span class="zsd">{{p.supports[1].name}}</span>
+                </div>
+                <div class="down">
+                  <span>￥{{p.float_minimum_order_amount}}起送 / 配送费约￥{{p.float_delivery_fee}}</span>
+                  <span class="time">{{p.order_lead_time}}</span>
+                  <span class="jl">{{p.distance}} /</span>
+                </div>
+              </div>
             </div>
-            <div class="y-two">
-              <van-rate v-model="v.rating" readonly :count="5" allow-half size="0.8rem" :gutter="0"/>
-              <span class="y-wz2">{{v.rating}}</span><span class="y-wz2s">月售{{v.recent_order_num}}单</span><span
-              :style="{borderColor:'#'+v.supports[1].icon_color,color:'#'+v.supports[1].icon_color}" class="y-wz2q">{{v.supports[1].name}}</span><span
-              :style="{background:'#'+v.delivery_mode.color}" class="y-wz2r">{{v.delivery_mode.text}}</span>
-            </div>
-            <div class="y-three">
-              <span class="y-wz3">￥{{v.float_minimum_order_amount}}起送 / 配送费约￥5</span>
-              <span class="y-wz3s">{{v.distance}} / <span :style="{color:'#'+v.delivery_mode.color}">{{v.order_lead_time}}</span></span>
-            </div>
-          </div>
+            <div class="qf"></div>
+          </router-link>
         </li>
       </ul>
     </div>
-
   </div>
 </template>
-
 <script>
-  import {DropdownMenu, DropdownItem, Rate, TreeSelect} from 'vant'
-  import 'vant/lib/index.css'
-
   export default {
-    name: "Shopclass",
-    data() {
-      return {
-        title: "",
-        longitude: "121.4762",
-        latitude: "31.22967",
-        arrshop: "",
-        B: "https://elm.cangdu.org/img/",
-        value1: 0,
-        value2: 'a',
-        bzp: "",
-        option1: [
-          {text: '全部商品', value: 0},
-          {text: '新款商品', value: 1},
-          {text: '活动商品', value: 2}
-        ],
-        option2: [
-          {text: '排序', value: 'a'},
-        ],
-        items: [],
-        items_info: [],
-        activeId: 1,
-        activeIndex: 0,
-        proArr: [],
-        num: "0",
-        numDiv: true,
-        sortArr:["智能排序","距离最近","销量最高","起送价最低","配送速度最快","评分最高"],
-      }
-    },
-    components: {
-      [Rate.name]: Rate,
-      [DropdownMenu.name]: DropdownMenu,
-      [DropdownItem.name]: DropdownItem,
-      [TreeSelect.name]: TreeSelect,
-    },
-    created() {
-      this.title = this.$route.query.title;
-      this.axios.get("https://elm.cangdu.org/shopping/restaurants", {
-        params: {
-          latitude: this.latitude,
-          longitude: this.longitude
-        }
-      }).then((res) => {
-        this.arrshop = res.data
-      });
-      this.axios.get("https://elm.cangdu.org/shopping/v2/restaurant/category").then((list) => {
-        for (let i = 0; i < list.data.length; i++) {
-          this.items_info.push([]);
-          for (let j = 1; j < list.data[i].sub_categories.length; j++) {
-            if (list.data[i].sub_categories) {
-              this.items_info[i].push({text: list.data[i].sub_categories[j].name, info: 3, id: j})
+    name: "aSortShop",
+      data(){
+          return {
+            changeArr1:[true,true,true,true,true,true,true],
+            titleName:'',
+            index:0,
+            lastInfo:[],
+            qwertyui:[],
+            shopListInfo:[],
+            imgUrl:"https://elm.cangdu.org/img/",
+            shopsortInfo:[],
+            firstInfo:[],
+            giveInfo:[],
+            value1:'0',
+          }
+      },
+      methods:{
+        huoqu(id){
+          this.axios.get("http://elm.cangdu.org/shopping/restaurants?latitude=" + this.lastInfo[1] + "&longitude=" + this.lastInfo[2] + "&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]=" + id +"&order_by=null&delivery_mode[]=null").then((p)=>{
+            this.shopListInfo=p.data;
+          })
+        },
+        gotodetail(x){
+          localStorage.setItem("detailId",JSON.stringify(x));
+          this.$router.push({path:'/storedetail'})
+        },
+
+        isqwert(Arr){
+          this.qwertyui=Arr;
+        },
+        diffsearch(){
+          let Arr1=[1,8,7,9,5,3,4];
+          let Arr2=[];
+          let path="http://elm.cangdu.org/shopping/restaurants?latitude="+this.lastInfo[1]+"&longitude="+this.lastInfo[2]+"&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]=&order_by=null";
+          for(let i=0;i<this.changeArr1.length;i++){
+            if(this.changeArr1[i]==false){
+              Arr2.push(Arr1[i]);
             }
           }
+          if(Arr2.length==1){
+            if(Arr2[0]==1){
+              path=path+"&delivery_mode[]=1";
+            }else{
+              path=path+"&delivery_mode[]=null&support_ids[]="+Arr2[0];
+            }
+          }else {
+            if(Arr2[0]==1){
+              path=path+"&delivery_mode[]=1";
+              for(let j=1;j<Arr2.length;j++){
+                path=path+"&support_ids[]="+Arr2[j];
+              }
+            }else{
+              for(let j=0;j<Arr2.length;j++){
+                path=path+"&support_ids[]="+Arr2[j];
+              }
+            }
+          }
+          this.axios.get(path).then((p)=>{
+            this.shopListInfo=p.data;
+          })
+        },
+        deleteAll(){
+          this.changeArr1=[true,true,true,true,true,true,true];
+        },
+        funnumber(){
+          let num=0;
+          for(let i=0 ;i<this.changeArr1.length;i++){
+            if(this.changeArr1[i]==false){
+              num++;
+            }
+          }
+          if(num==0){
+            return '';
+          }else{
+            return '( '+num+' )';
+          }
+        },
+        ischange(num){
+          this.changeArr1[num]=!this.changeArr1[num];
+          this.changeArr1=[...this.changeArr1];
+        },
+        toInfo(i){
+          return this.shopsortInfo[i].sub_categories;
+        },
+        getinfo(id){
+            this.axios.get("http://elm.cangdu.org/shopping/restaurants?latitude="+this.lastInfo[1]+"&longitude="+this.lastInfo[2]+"&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]=&order_by=" + id + "&delivery_mode[]=null&support_ids[]=4").then((p)=>{
+              this.shopListInfo=p.data;
+            })
         }
-        for (let i in list.data) {
-          this.items.push({text: list.data[i].name, children: this.items_info[i], info: list.data[i].count})
-        }
-      });
-
-
-      this.axios.get("https://elm.cangdu.org/shopping/v1/restaurants/activity_attributes").then((pro) => {
-        this.proArr = pro.data
-      })
-    },
-    methods: {
-      empty(){
-        this.num = 0
       },
-      leave() {
-        this.$router.go(-1)
-      },
-      xiang(id) {
-        localStorage.setItem("detailId",JSON.stringify(id));
-        localStorage.setItem("shopId",JSON.stringify(id))
-        this.$router.push({path:'/storedetail'})
-      },
-      numpush() {
-        this.num++;
-        this.numDiv = false;
-      },
-      sortStore(sortName){
-        console.log(sortName)
+      created(){
+        this.lastInfo=[this.$route.query.title,this.$route.query.latitude,this.$route.query.longitude],
+          this.titleName=this.lastInfo[0];
+        this.axios.get('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.lastInfo[1] + '&longitude=' + this.lastInfo[2]).then((p)=>{
+          this.shopListInfo=p.data;
+        })
+        //"http://elm.cangdu.org/shopping/v2/restaurant/category?latitude=31.146643&longitude=121.381662"
+        this.axios.get('http://elm.cangdu.org/shopping/v2/restaurant/category?latitude=' + this.lastInfo[1] + '&longitude=' + this.lastInfo[2]).then((p)=>{
+          this.shopsortInfo=p.data;
+          this.firstInfo=this.shopsortInfo.splice(0,1);
+          for(let key in this.shopsortInfo){
+            this.shopsortInfo[key].sub_categories.splice(0,1);
+          }
+          this.qwertyui=this.firstInfo[0].sub_categories;
+          //对图片信息做处理
+          for(let i=0;i<this.shopsortInfo.length;i++){
+            let a=[...this.shopsortInfo[i].image_url];
+            let lastpath1="";
+            let lastpath2="";
+            for(let j=a.length-3;j<a.length;j++){
+              lastpath1+=a[j];
+            }
+            for(let j=a.length-4;j<a.length;j++){
+              lastpath2+=a[j];
+            }
+            this.shopsortInfo[i].image_url='https://fuss10.elemecdn.com/'+a[0]+"/"+a[1]+a[2]+"/";
+            for(let j=3;j<a.length;j++){
+              this.shopsortInfo[i].image_url=this.shopsortInfo[i].image_url+a[j];
+            }
+            if(lastpath1=='png'){
+              this.shopsortInfo[i].image_url=this.shopsortInfo[i].image_url+".png";
+            }else if(lastpath1=='jpeg'){
+              this.shopsortInfo[i].image_url=this.shopsortInfo[i].image_url+".jpeg";
+            }else{
+              this.shopsortInfo[i].image_url='';
+            }
+          }
+        })
       }
     }
-  }
 </script>
 
 <style scoped>
-  .shopClass {
-    width: 100%;
-    height: 100%;
+  @import "//at.alicdn.com/t/font_1466325_l6l6is31pk.css";
+  /* 蜂鸟 icon-fengniao */
+  @import "//at.alicdn.com/t/font_1461051_gb3o5hozhzq.css";
+  /* 返回箭头  icon-jiantou*/
+  @import "//at.alicdn.com/t/font_1466067_p9mmv39dhfj.css";
+  /* 智能排序  icon-renqipaixu*/
+  @import "//at.alicdn.com/t/font_1466068_azb7almpp2l.css";
+  /* 距离最近 icon-julizuijin*/
+  @import "//at.alicdn.com/t/font_1466071_n7o3grur8v.css";
+  /* 销量最高 icon-hebingxingzhuang */
+  @import "//at.alicdn.com/t/font_1466072_lbgtjp768bh.css";
+  /* 起送价最低  icon-jg*/
+  @import "//at.alicdn.com/t/font_1466074_4bww3y96zq5.css";
+  /* 配送速度最快 icon-shijian */
+  @import "//at.alicdn.com/t/font_1466075_2h85xum83zs.css";
+  /* 评分最高 icon-pingfen */
+  .sortshops{
     animation: fae .5s;
     -webkit-animation:fae .5s;
     animation-fill-mode: forwards;
   }
-
   @keyframes  fae{
     0%{
       opacity: 0;
@@ -180,249 +325,363 @@
       opacity: 1;
     }
   }
-  .header {
-    width: 100%;
-    background: rgb(49, 144, 232);
-    height: 2.7rem;
-    text-align: center;
-    line-height: 2.7rem;
-    font-size: 1.2rem;
-    color: white;
-    font-weight: 700;
-    position: fixed;
+  .sxas>ul>li>i{
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-right: 0.25rem;
+  }
+  .sxas>ul>li>p{
+    display: inline-block;
+    position: absolute;
     top: 0;
-    left: 0;
-    z-index: 1;
+    left: 1.3rem;
   }
-  .header > img {
-    height: 1.6rem;
-    width: 1.8rem;
-    position: relative;
-    right: 8rem;
-  }
-
-  .shop-n {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    width: 100%;
-    height: 6rem;
-    border-bottom: 1px solid rgb(245, 245, 245);
-  }
-
-  .shop-y {
-    width: 17rem;
-  }
-
-  .y-one {
-    margin-left: 0.5rem;
-    height: 1rem;
-    overflow: hidden;
-  }
-
-  .y-wz1 {
-    display: inline;
+  .span26{
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-right: 0.25rem;
     font-size: 1rem;
-    font-weight: 600;
+    color: #3190e8;
   }
-
-  .y-wz1:before {
-    content: '品牌';
-    display: inline-block;
-    font-size: 0.8rem;
-    line-height: 1rem;
-    color: #333;
-    background-color: #ffd930;
-    padding: 0 0.2rem;
-    border-radius: 0.1rem;
-    margin-right: 0.2rem;
-  }
-
-  .y-two {
-    margin-left: 0.5rem;
-    margin-top: 0.5rem;
-    height: 1.5rem;
-    overflow: hidden;
-  }
-
-  .y-wz2 {
-    line-height: 2rem;
-    margin-left: 0.2rem;
-    font-size: 0.8rem;
-    color: #FF6000;
-  }
-
-  .y-wz2s {
-    margin-left: 0.3rem;
-    font-size: 0.8rem;
-    color: #666;
-  }
-
-  .y-wz2r {
-    margin-top: 0.5rem;
-    float: right;
-    color: white;
-    font-size: 0.5rem;
-    font-weight: 200;
-  }
-
-  .y-wz2q {
-    float: right;
-    margin-top: 0.5rem;
-    margin-left: 0.3rem;
-    border: 1px solid;
-    font-size: 0.5rem;
-    font-weight: 500;
-  }
-
-  .y-three {
-    margin-left: 0.5rem;
-    margin-top: 0.5rem;
-    height: 1.5rem;
-    overflow: hidden;
-  }
-
-  .y-wz3 {
-    display: inline-block;
-    float: left;
-    line-height: 2.3rem;
-    color: #666666;
-    font-weight: 300;
-    font-size: 0.5rem;
-  }
-
-  .y-wz3s {
-    display: inline-block;
-    float: right;
-    line-height: 2.3rem;
-    color: #666666;
-    font-weight: 300;
-    font-size: 0.5rem;
-  }
-
-  .shopList {
-    margin-top: 6.5rem;
-  }
-
-  >>> .van-tree-select__item {
-    color: #999999;
-  }
-
-  >>> .van-tree-select {
-    height: 400px;
-  }
-
-  >>> van-switch-cell:nth-child(1) {
-    color: black;
-    font-size: .8rem;
-    font-weight: normal;
-  }
-
-  >>> van-switch-cell:nth-child(2) {
-    color: black;
-    font-size: .8rem;
-    font-weight: normal;
-  }
-
-  .method {
-    color: #333333;
-    font-size: .7rem;
-    text-align: left;
-    margin-left: 1rem;
-    font-weight: normal;
-  }
-
-  .hummingbird {
-    display: flex;
-    align-items: center;
-    text-align: left;
-    width: 28%;
-    height: 2rem;
-    border: 1px solid #e4e4e4;
-    border-radius: .2rem;
-    color: #333333;
-    font-size: .7rem;
-    font-weight: normal;
-    margin-left: 1rem;
-  }
-
-  .hummingbird > img {
-    width: 1.3rem;
-    height: 1.3rem;
-  }
-
-  .propertyTitle {
-    color: #333333;
-    font-size: .7rem;
-    text-align: left;
-    margin-left: 1rem;
-    font-weight: normal;
-  }
-
-  .context {
-    color: black;
-    width: 30%;
-    height: 2rem;
-    float: left;
-    text-align: left;
-    border: 1px solid #e4e4e4;
-    margin-left: .5rem;
-    padding-left: .5rem;
-    margin-bottom: .5rem;
-    line-height: 2rem;
-    padding-bottom: 2.2rem;
-  }
-
-  .context span:nth-child(1) {
-    font-size: .7rem;
-    font-weight: normal;
-    border: 1px solid #666666;
-    border-radius: .2rem;
-    padding: .1rem .15rem;
-  }
-
-  .context span:nth-child(2) {
-    font-size: .7rem;
-    font-weight: normal;
-  }
-
-  .bot {
-    background: #f5f5f5;
-    overflow: hidden;
+  .sxasbottom{
+    width: 100%;
+    padding: 0.5rem;
+    background: #F1F1F1;
+    font-size: 0.9rem;
     display: flex;
     justify-content: space-around;
-    padding: .5rem 0;
   }
-
-  .empty {
+  .button1{
     width: 45%;
-    font-size: 1.1rem;
+    height: 2rem;
+    line-height: 2rem;
+    color: #333;
     background: white;
-    color: black;
-    float: left;
-    font-weight: normal;
-    border-radius: .4rem;
+    border:0.05rem solid white;
+    border-radius: 0.2rem;
+    margin-right: 0.6rem;
   }
-
-  .confirm {
+  .button2{
     width: 45%;
-    font-size: 1.1rem;
+    height: 2rem;
+    line-height: 2rem;
+    color: white;
+    background: #56D176;
+    border:0.05rem solid #56D176;
+    border-radius: 0.2rem;
+    margin-right: 0.6rem;
+  }
+  .span20{
+    color: #3f8de6;
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 0.05rem solid #3f8de6;
+    padding: 0 0.1rem;
+    border-radius: 0.15rem;
+    margin-right: 0.25rem;
+  }
+  .span21{
+    color: #AAAAAA;
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 0.05rem solid #AAAAAA;
+    padding: 0 0.1rem;
+    border-radius: 0.15rem;
+    margin-right: 0.25rem;
+  }
+  .span22{
+    color: #73B7FF;
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 0.05rem solid #73B7FF;
+    padding: 0 0.1rem;
+    border-radius: 0.15rem;
+    margin-right: 0.25rem;
+  }
+  .span23{
+    color: #EB964C;
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 0.05rem solid #EB964C;
+    padding: 0 0.1rem;
+    border-radius: 0.15rem;
+    margin-right: 0.25rem;
+  }
+  .span24{
+    color: #FF6724;
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 0.05rem solid #FF6724;
+    padding: 0 0.1rem;
+    border-radius: 0.15rem;
+    margin-right: 0.25rem;
+  }
+  .span25{
+    color: #A8A8A8;
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 0.05rem solid #A8A8A8;
+    padding: 0 0.1rem;
+    border-radius: 0.15rem;
+    margin-right: 0.25rem;
+  }
+  .sxas{
+    width:100%;
+    background: white;
+  }
+  .sxas>p{
+    width:100%;
+    height: 1.7rem;
+    line-height: 1.7rem;
+    font-size: 0.6rem;
+    color: #333;
+    padding-left: 0.6rem;
+    margin:0;
+  }
+  .sxas>ul{
+    width: 100%;
+    padding-left: 0.6rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    border-bottom: 0.05rem solid #FBFBFB;
+  }
+  .sxas>ul>li{
+    width: 30%;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    font-size: 0.6rem;
+    color: #333;
+    padding: 0 0.25rem;
+    margin:0 0.3rem 0.3rem 0;
+    border: 0.05rem solid #F1F1F1;
+    border-radius: 0.2rem;
+    position: relative;
+  }
+  .pxas{
+    width: 100%;
+  }
+  .pxas>li{
+    height: 2.9rem;
+    display: flex;
+    justify-content: flex-start;
+    line-height: 2.9rem;
+    font-size: 0.65rem;
+    color: #333;
+  }
+  .pxas>li>i{
+    width: 15%;
+    box-sizing: border-box;
+    padding-left:1.5rem;
+  }
+  .pxas>li>p{
+    width: 85%;
+    height: 2.9rem;
+    border-bottom: 0.1rem solid #e4e4e4;
+  }
+  .foodsulR{
+    width: 50%;
+  }
+  .foodsulR>li{
+    width: 100%;
+    height: 2rem;
+    line-height: 2rem;
+    display: flex;
+    justify-content: space-between;
+    font-size:0.65rem;
+    color: #333;
+    padding: 0 0.5rem;
+  }
+  .doubleUl{
+    width: 100%;
+    height: 18.5rem;
+    display: flex;
+    justify-content: space-between;
+    overflow: auto;
+  }
+ .firstli{
+   font-size: 0.6rem;
+   color: #666;
+   padding-left: 0.5rem;
+   display: flex;
+   justify-content: space-between;
+   padding: 0.6rem 0.5rem;
+ }
+  .foodsul{
+    width: 50%;
+    margin: 0;
+  }
+  .foodsul>li{
+    width: 100%;
+    height: 2rem;
+    background: #F1F1F1;
+  }
+  .foodsul>li>div{
+    width: 100%;
+    height: 100%;
+    padding-left:0.5rem;
+    line-height: 2rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .anextL{
+    font-size: 0.6rem;
+    color: #666;
+  }
+  .anextL>img{
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+  }
+  .anextR{
+    color: rgb(187, 187, 187);
+    padding-right: 0.5rem;
+  }
+  .anextR>span,.span15{
+    color: white;
+    font-size: 0.6rem;
+    background: #ccc;
+    padding: 0 0.2rem;
+    border-radius: 0.3rem;
+  }
+  .sortshops{
+    width: 100%;
+    height: 100%;
+  }
+  .header{
+    width: 100%;
+    height: 2.2rem;
+    background: #3190E8;
+    color: white;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 5;
+  }
+  .a1{
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    top: 0.4rem;
+    left: 0.5rem;
+  }
+  .header>p{
+    text-align: center;
+    padding-top: 0.5rem;
+    margin: 0;
+  }
+  .a1>img{
+    width: 100%;
+  }
+  .firstul{
+    margin-top: 2.2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    padding: 0.35rem 0;
+  }
+  .firstul>li{
+    width: 30%;
+    font-size: 0.6rem;
+    color: #333;
+    text-align: center;
+  }
+  .foods{
+    width: 100%;
+    background: white;
+    margin-top: 0.7rem;
+  }
+  .foods>ul{
+    width: 100%;
+    overflow: hidden;
+  }
+  .foods>ul>li{
+    width: 100%;
+    height: 5rem;
+    border-bottom: 0.05rem solid #e4e4e4;
+  }
+  .a5{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+  }
+  .a5>img{
     float: left;
-    background: rgb(86, 209, 118);
-    font-weight: normal;
-    border-radius: .4rem;
+    width: 20%;
+    margin: 0.25rem 0 0 0.5rem;
+  }
+  .rights{
+    width: 75%;
+    display: inline-block;
+    float: left;
+    margin:0.5rem 0 0 0.2rem;
+  }
+  .up{
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+  }
+  .pp{
+    background: #ffd930;
+    color: #333;
+    font-size: 0.5rem;
+    margin-right: 0.25rem;
+    padding: 0 0.1rem;
+  }
+  .ppname{
+    display: inline-block;
+    font-size: 0.75rem;
+    color: #333;
+    padding-top: 0.1rem;
+  }
+  .upright{
+    display: flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    color: #999;
+    font-size: 0.6rem;
+    padding: 0.1rem 0.05rem;
+  }
+  .upright>span{
+
+    border: 0.05rem solid #f1f1f1;
+    margin-left: 0.05rem;
+
+  }
+  .center{
+    font-size: 0.5rem;
+    color: #333333;
+    margin-top: 0.3rem;
+  }
+  .centerRight{
+    display: inline-block;
+    float: right;
+  }
+  .fnzs{
+    background: #3190e8;
+    border-radius: 0.1rem;
+    color: white;
+  }
+  .zsd{
+    color: #3190e8;
+    font-size: 0.6rem;
+    margin-left: 0.1rem;
+    border:0.05rem solid #3190e8;
+  }
+  .down{
+    font-size: 0.3rem;
+    margin-top: 0.6rem;
+    color: #333333;
+  }
+  .jl{
+    color: #999999;
+    float: right;
+  }
+  .time{
+    color: #3190e8;
+    float: right;
   }
 
-  .numDiv {
-    display: none;
-  }
-  .sort{
-    color: #666666;
-    text-align: left;
-    font-size: .5rem;
-    padding-left: 1rem;
-  }
-  .sort li {
-    border-bottom: 1px solid #e4e4e4;
-  }
 </style>
